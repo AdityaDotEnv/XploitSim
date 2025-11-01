@@ -1,51 +1,64 @@
 /**
  * init_db.js
- * -----------------------------------------
- * Initializes the SQLite database for XploitSim.
- * Creates tables if they do not exist.
- * Safe for sandbox/demo use only.
+ * Initializes the SQLite database for XploitSim sandbox
+ * Creates tables: users, documents, logs
  */
 
-const fs = require('fs');
-const path = require('path');
-require('dotenv').config();
+const fs = require("fs");
+const path = require("path");
+const sqlite3 = require("sqlite3").verbose();
 
-const sqlite3 = require('sqlite3').verbose();
+// ✅ Always resolve path relative to *this file’s directory*, not CWD
+const dbDir = __dirname;
+const dbPath = path.join(dbDir, "xploitsim.sqlite");
 
-// Resolve DB path absolutely relative to this script
-const dbPath = path.resolve(__dirname, '../../db/xploitsim.sqlite');
+console.log(`🗂️ Database path: ${dbPath}`);
 
-if (fs.existsSync(dbPath)) {
-  console.log(`Database file already exists at ${dbPath}`);
-  console.log('If you want to recreate, delete the file and run this script again.');
-  process.exit(0);
+// Ensure db directory exists
+if (!fs.existsSync(dbDir)) {
+  fs.mkdirSync(dbDir, { recursive: true });
 }
 
-fs.mkdirSync(path.dirname(dbPath), { recursive: true });
+if (fs.existsSync(dbPath)) {
+  console.log(`Database already exists at ${dbPath}`);
+  process.exit(0);
+}
 
 const db = new sqlite3.Database(dbPath);
 
 db.serialize(() => {
-  console.log(`Creating database at ${dbPath}`);
+  console.log("Creating tables...");
 
   db.run(`
     CREATE TABLE users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      username TEXT UNIQUE,
-      password TEXT,
-      role TEXT
-    );
+      username TEXT UNIQUE NOT NULL,
+      password TEXT NOT NULL,
+      role TEXT NOT NULL DEFAULT 'user'
+    )
+  `);
+
+  db.run(`
+    CREATE TABLE documents (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      owner_id INTEGER NOT NULL,
+      title TEXT NOT NULL,
+      content TEXT,
+      FOREIGN KEY (owner_id) REFERENCES users(id)
+    )
   `);
 
   db.run(`
     CREATE TABLE logs (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      action TEXT,
-      timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-    );
+      message TEXT,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
   `);
+
+  console.log("✅ Tables created successfully.");
 });
 
 db.close(() => {
-  console.log(`Database created at ${dbPath}`);
+  console.log(`✅ Database created at ${dbPath}`);
 });

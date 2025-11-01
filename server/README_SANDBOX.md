@@ -1,10 +1,11 @@
-# XploitSim - Broken Access Control Sandbox
+# XploitSim - Broken Access Control (Sandbox)
 
-**DANGER:** This repository intentionally contains vulnerable endpoints **for educational use only**.
+**DANGER:** This server intentionally contains vulnerabilities for educational purposes (IDOR, missing authorization, privilege escalation).
 
-## Safety rules (must read)
-- This server refuses to run unless `SANDBOX=1` and `NODE_ENV` != `production`.
-- Do not expose this server to public networks.
-- Use only on localhost or inside an isolated network (e.g., local VM).
+Safety rules:
+- This server refuses to run unless `SANDBOX=1` and `NODE_ENV` is not `production`.
+- Run only locally or in an isolated environment.
+- Do not expose to the public Internet.
 
-Follow instructions in the project root for seeding the DB and running tests.
+Use `npm run db:init` then `npm run db:seed` to create and seed the database.
+Start the server with `npm start`.
