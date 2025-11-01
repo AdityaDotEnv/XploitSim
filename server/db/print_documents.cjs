@@ -1,9 +1,9 @@
-// Print documents
+// server/db/print_documents.cjs
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const fs = require('fs');
 
-const dbPath = path.resolve(process.env.DATABASE_FILE || path.resolve(__dirname, 'xploitsim.sqlite'));
+const dbPath = path.resolve(__dirname, 'xploitsim.sqlite');
 console.log('DB path:', dbPath);
 if (!fs.existsSync(dbPath)) {
   console.error('DB file not found');

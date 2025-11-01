@@ -1,14 +1,14 @@
 {
-  "name": "xploitsim-broken-access-control",
+  "name": "xploitsim-vulnerable-server",
   "version": "1.0.0",
-  "description": "XploitSim - Broken Access Control (educational sandbox)",
+  "description": "XploitSim broken access control vulnerable demo (local sandbox)",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js",
     "db:init": "node db/init_db.js",
     "db:seed": "node db/seed.js",
-    "db:seed-docs": "node db/seed_documents.js"
+    "db:print-users": "node db/print_users.cjs",
+    "db:print-docs": "node db/print_documents.cjs"
   },
   "author": "XploitSim",
   "license": "MIT",
@@ -19,10 +19,6 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "morgan": "^1.10.0",
-    "sqlite3": "^5.1.6",
-    "yargs": "^17.7.2"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.22"
+    "sqlite3": "^5.1.6"
   }
 }
