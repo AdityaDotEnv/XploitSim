@@ -38,7 +38,7 @@ This sandbox serves as both a **teaching tool** and a **developer awareness plat
 
 ```bash
 git clone https://github.com/AdityaDotEnv/XploitSim.git
-cd xplotisim
+cd XploitSim
 ```
 
 ### 2️⃣ Install Dependencies
