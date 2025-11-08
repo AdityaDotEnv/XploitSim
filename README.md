@@ -37,7 +37,7 @@ This sandbox serves as both a **teaching tool** and a **developer awareness plat
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/xplotisim.git
+git clone https://github.com/AdityaDotEnv/XploitSim.git
 cd xplotisim
 ```
 
@@ -53,7 +53,7 @@ npm install
 npm start
 ```
 
-Then open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Then open [http://localhost:5137](http://localhost:5137) to view it in your browser.
 Hot reload is enabled — any change you make is instantly reflected.
 
 ### 4️⃣ Build for Production
