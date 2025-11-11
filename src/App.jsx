@@ -8,6 +8,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import OWASPTop10 from './components/OWASPTop10';
 import BrokenAccessControl from './components/BrokenAccessControl';
+import BrokenAccessControlSandbox from "./components/BrokenAccessControlSandbox";
 import CryptographicFailures from './components/CryptographicFailures';
 import Injection from './components/Injection';
 import InsecureDesign from './components/InsecureDesign';
@@ -75,6 +76,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/broken-access-control" element={<BrokenAccessControl />} />
+            <Route path="/broken-access-control/demo" element={<BrokenAccessControlSandbox key={Date.now()} />}/>
             <Route path="/cryptographic-failures" element={<CryptographicFailures />} />
             <Route path="/injection" element={<Injection />} />
             <Route path="/insecure-design" element={<InsecureDesign />} />
