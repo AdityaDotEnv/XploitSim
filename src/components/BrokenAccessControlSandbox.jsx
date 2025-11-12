@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./VulnerabilityPage.css";
+import "./BrokenAccessControlSandbox.css";
 import { useNavigate } from "react-router-dom";
 
 const API_URL = "http://localhost:4000";

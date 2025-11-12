@@ -50,6 +50,7 @@ npm install
 ### 3️⃣ Start the Development Server
 
 ```bash
+node server.js
 npm start
 ```
 
