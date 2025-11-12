@@ -1,5 +1,4 @@
 /* BrokenAccessControl.css - Advanced & No Gaps */
-
 /* Reset and Base Styles */
 * {
   margin: 0;
@@ -712,3 +711,14 @@
     padding: 0 1rem;
   }
 }
+
+/* --- sandbox helper styles (append to BrokenAccessControl.css) --- */
+.bac-sandbox { padding: 16px; border-radius: 8px; background: #fff; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+.bac-sandbox .sandbox-row { display:flex; gap:16px; flex-wrap:wrap; }
+.bac-sandbox .sandbox-column { flex:1 1 320px; min-width:260px; }
+.bac-sandbox input, .bac-sandbox textarea { width:100%; padding:8px; margin-top:6px; border:1px solid #ddd; border-radius:4px; }
+.bac-sandbox button { padding:8px 12px; margin-right:8px; }
+.token-preview { background:#f5f5f5; padding:8px; border-radius:4px; margin-top:6px; font-family:monospace; font-size:12px; }
+.log-area { background:#0f1724; color:#e6eef8; padding:8px; border-radius:6px; max-height:200px; overflow:auto; font-family:monospace; font-size:12px; }
+.log-line { padding:2px 0; }
+.result pre { white-space:pre-wrap; word-wrap:break-word; background:#f3f4f6; padding:8px; border-radius:6px; }
