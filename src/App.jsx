@@ -8,7 +8,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import OWASPTop10 from './components/OWASPTop10';
 import BrokenAccessControl from './components/BrokenAccessControl';
-import BrokenAccessControlSandbox from "./components/BrokenAccessControlSandbox";
+import BrokenAccessControlSandbox from './components/BrokenAccessControlSandbox';
 import CryptographicFailures from './components/CryptographicFailures';
 import Injection from './components/Injection';
 import InsecureDesign from './components/InsecureDesign';
@@ -19,7 +19,6 @@ import SoftwareDataIntegrity from './components/SoftwareDataIntegrity';
 import SecurityLoggingFailures from './components/SecurityLoggingFailures';
 import ServerSideRequestForgery from './components/ServerSideRequestForgery';
 import AuthenticationSandbox from './components/AuthenticationSandbox';
-
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -74,9 +73,14 @@ function App() {
         <Navbar />
         <main className="main-content">
           <Routes>
+            {/* Home Page */}
             <Route path="/" element={<HomePage />} />
+
+            {/* OWASP Vulnerability Pages */}
             <Route path="/broken-access-control" element={<BrokenAccessControl />} />
-            <Route path="/broken-access-control/demo" element={<BrokenAccessControlSandbox key={Date.now()} />}/>
+            <Route path="/broken-access-control/demo" element={<BrokenAccessControlSandbox key={Date.now()} />} />
+            {/* ✅ Added missing sandbox route */}
+            <Route path="/broken-access-control/sandbox" element={<BrokenAccessControlSandbox key={Date.now()} />} />
             <Route path="/cryptographic-failures" element={<CryptographicFailures />} />
             <Route path="/injection" element={<Injection />} />
             <Route path="/insecure-design" element={<InsecureDesign />} />
@@ -86,7 +90,26 @@ function App() {
             <Route path="/software-data-integrity" element={<SoftwareDataIntegrity />} />
             <Route path="/security-logging-failures" element={<SecurityLoggingFailures />} />
             <Route path="/server-side-request-forgery" element={<ServerSideRequestForgery />} />
+
+            {/* Sandbox Routes */}
             <Route path="/sandbox/authentication-failures" element={<AuthenticationSandbox />} />
+            <Route path="/sandbox/broken-access-control" element={<BrokenAccessControlSandbox key={Date.now()} />} />
+
+            {/* Fallback Route */}
+            <Route
+              path="*"
+              element={
+                <div
+                  style={{
+                    textAlign: 'center',
+                    marginTop: '100px',
+                    fontFamily: 'sans-serif',
+                  }}
+                >
+                  <h2>404 - Page Not Found</h2>
+                </div>
+              }
+            />
           </Routes>
         </main>
         <Footer />
