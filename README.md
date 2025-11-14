@@ -51,9 +51,9 @@ npm install
 npm install --prefix broken-access-control
 npm install --prefix cryptographic-failures
 npm install --prefix injection
+npm install --prefix insecure-design
 
 2️⃣ Seed the Injection Database
-
 Only required once (or when resetting).
 npm install sqlite3
 npm install sqlite
