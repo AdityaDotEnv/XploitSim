@@ -31,7 +31,7 @@ Each vulnerability is implemented as an **independent backend microservice** and
 | **A03** | Injection                                  | 5100  | ✅ Active |
 | **A04** | Insecure Design                            | 5200  | ✅ Active |
 | **A05** | Security Misconfiguration                  | 5300  | ✅ Active |
-| **A06** | Vulnerable & Outdated Components          | 5050  | 🆕 NEW |
+| **A06** | Vulnerable & Outdated Components          | 5051  | 🆕 NEW |
 
 ---
 
