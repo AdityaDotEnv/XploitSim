@@ -21,6 +21,7 @@ import SoftwareDataIntegrity from './components/SoftwareDataIntegrity';
 import SecurityLoggingFailures from './components/SecurityLoggingFailures';
 import ServerSideRequestForgery from './components/ServerSideRequestForgery';
 import AuthenticationSandbox from './components/AuthenticationSandbox';
+import InsecureDesignSandbox from './components/InsecureDesignSandbox';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -101,7 +102,8 @@ function App() {
             {/* Sandbox Routes */}
             <Route path="/sandbox/authentication-failures" element={<AuthenticationSandbox />} />
             <Route path="/sandbox/broken-access-control" element={<BrokenAccessControlSandbox key={Date.now()} />} />
-
+            <Route path="/insecure-design" element={<InsecureDesign />} />
+            <Route path="/insecure-design/sandbox" element={<InsecureDesignSandbox />} />       
             {/* Fallback Route */}
             <Route
               path="*"

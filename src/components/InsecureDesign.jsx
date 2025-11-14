@@ -1,7 +1,10 @@
 import React from 'react';
 import './VulnerabilityPage.css';
+import { useNavigate } from 'react-router-dom';
 
 const InsecureDesign = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="vulnerability-page">
       <section className="vp-hero">
@@ -155,7 +158,7 @@ const InsecureDesign = () => {
         </div>
       </section>
 
-      {/* Real World Examples */}
+      {/* Examples */}
       <section className="vp-section vp-examples">
         <div className="vp-container">
           <h2>Real-World Design Failure Examples</h2>
@@ -197,7 +200,7 @@ const InsecureDesign = () => {
         </div>
       </section>
 
-      {/* Prevention Section */}
+      {/* Prevention */}
       <section className="vp-section vp-prevention">
         <div className="vp-container">
           <h2>Secure Design Principles & Strategies</h2>
@@ -257,7 +260,7 @@ const InsecureDesign = () => {
         </div>
       </section>
 
-      {/* Code Examples */}
+      {/* Code */}
       <section className="vp-section vp-code">
         <div className="vp-container">
           <h2>Secure Design Examples</h2>
@@ -317,7 +320,15 @@ class SecureDataStorage {
             </div>
           </div>
         </div>
-        <button type="button" class="btn btn-outline-warning">Try it Yourself</button>
+
+        {/* UPDATED BUTTON WITH SANDBOX LINK */}
+        <button
+          type="button"
+          className="btn btn-outline-warning"
+          onClick={() => navigate('/insecure-design/sandbox')}
+        >
+          Try it Yourself
+        </button>
       </section>
 
       {/* Resources */}
