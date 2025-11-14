@@ -5,6 +5,7 @@
     "start": "concurrently \"npm --prefix broken-access-control start\" \"npm --prefix cryptographic-failures start\" \"npm --prefix injection start\" \"npm --prefix insecure-design start\""
   },
   "dependencies": {
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "sqlite3": "^5.1.7"
   }
 }
