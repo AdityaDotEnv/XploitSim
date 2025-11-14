@@ -12,6 +12,7 @@ import BrokenAccessControlSandbox from './components/BrokenAccessControlSandbox'
 import CryptographicFailures from './components/CryptographicFailures';
 import CryptographicFailuresSandbox from "./components/CryptographicFailuresSandbox";
 import Injection from './components/Injection';
+import InjectionSandbox from './components/InjectionSandbox';   // ⭐ ADDED
 import InsecureDesign from './components/InsecureDesign';
 import SecurityMisconfiguration from './components/SecurityMisconfiguration';
 import VulnerableComponents from './components/VulnerableComponents';
@@ -80,11 +81,15 @@ function App() {
             {/* OWASP Vulnerability Pages */}
             <Route path="/broken-access-control" element={<BrokenAccessControl />} />
             <Route path="/broken-access-control/demo" element={<BrokenAccessControlSandbox key={Date.now()} />} />
-            {/* ✅ Added missing sandbox route */}
+            {/* Added missing sandbox route */}
             <Route path="/broken-access-control/sandbox" element={<BrokenAccessControlSandbox key={Date.now()} />} />
             <Route path="/cryptographic-failures" element={<CryptographicFailures />} />
             <Route path="/cryptographic-failures/demo" element={<CryptographicFailuresSandbox />} />
             <Route path="/injection" element={<Injection />} />
+
+            {/* ⭐ Added NEW Injection Sandbox Route */}
+            <Route path="/injection-sandbox" element={<InjectionSandbox />} />
+
             <Route path="/insecure-design" element={<InsecureDesign />} />
             <Route path="/security-misconfiguration" element={<SecurityMisconfiguration />} />
             <Route path="/vulnerable-components" element={<VulnerableComponents />} />

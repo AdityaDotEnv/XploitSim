@@ -46,13 +46,36 @@ cd XploitSim
 ```bash
 npm install
 ```
+cd server
+npm install
+npm install --prefix broken-access-control
+npm install --prefix cryptographic-failures
+npm install --prefix injection
 
-### 3️⃣ Start the Development Server
+2️⃣ Seed the Injection Database
 
-```bash
-node server.js
+Only required once (or when resetting).
+npm install sqlite3
+npm install sqlite
+npm run seed --prefix injection
+
+You should see:
+Seeded injection.sqlite with users table.
+
+3️⃣ Start All Vulnerability Servers (ONE COMMAND)
+
+Inside the server folder:
+
+cd server
 npm start
-```
+
+4️⃣ Start the Frontend (React + Vite)
+
+Open a second terminal and run:
+
+cd frontend   # or wherever your React project is located
+npm install    # only the first time
+npm run dev
 
 Then open [http://localhost:5137](http://localhost:5137) to view it in your browser.
 Hot reload is enabled — any change you make is instantly reflected.
@@ -66,6 +89,14 @@ npm run build
 This creates an optimized production build inside the `/build` folder — ready for deployment.
 
 ---
+🎉 That's It — Entire XploitSim Runs with Two Commands
+Terminal 1 (Backend)
+cd server
+npm start
+
+Terminal 2 (Frontend)
+cd frontend
+npm run dev
 
 ## 🧱 Tech Stack
 
