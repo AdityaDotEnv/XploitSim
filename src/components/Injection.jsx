@@ -1,7 +1,10 @@
 import React from 'react';
 import './VulnerabilityPage.css';
+import { useNavigate } from 'react-router-dom';
 
 const Injection = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="vulnerability-page">
       <section className="vp-hero">
@@ -153,7 +156,6 @@ const Injection = () => {
               <p>Injection through Object-Relational Mapping layers when raw queries or unsafe methods are used.</p>
               <div className="vp-vector-example">
                 <code>{`User.where("name = '#{params[:name]}'")`}</code>
-
               </div>
             </div>
           </div>
@@ -303,7 +305,15 @@ db.execute('sp_getUserByUsername', [username]);`}</pre>
             </div>
           </div>
         </div>
-        <button type="button" class="btn btn-outline-warning">Try it Yourself</button>
+
+        {/* ⭐ Updated Button → Link to Injection Sandbox */}
+        <button
+          type="button"
+          className="btn btn-outline-warning"
+          onClick={() => navigate('/injection-sandbox')}
+        >
+          Try it Yourself
+        </button>
       </section>
 
       {/* Resources */}
