@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import './VulnerabilityPage.css';
 
 const CryptographicFailures = () => {
+  const navigate = useNavigate();
   return (
     <div className="vulnerability-page">
       {/* Hero Section */}
@@ -310,7 +312,15 @@ app.use(helmet());`}</pre>
             </div>
           </div>
         </div>
-        <button type="button" class="btn btn-outline-warning">Try it Yourself</button>
+        <div className="vp-button-container">
+          <button
+            type="button"
+            className="try-it-btn"
+            onClick={() => navigate("/cryptographic-failures/demo")}
+          >
+            Try it Yourself
+          </button>
+        </div>
       </section>
 
       {/* Resources */}

@@ -10,6 +10,7 @@ import OWASPTop10 from './components/OWASPTop10';
 import BrokenAccessControl from './components/BrokenAccessControl';
 import BrokenAccessControlSandbox from './components/BrokenAccessControlSandbox';
 import CryptographicFailures from './components/CryptographicFailures';
+import CryptographicFailuresSandbox from "./components/CryptographicFailuresSandbox";
 import Injection from './components/Injection';
 import InsecureDesign from './components/InsecureDesign';
 import SecurityMisconfiguration from './components/SecurityMisconfiguration';
@@ -82,6 +83,7 @@ function App() {
             {/* ✅ Added missing sandbox route */}
             <Route path="/broken-access-control/sandbox" element={<BrokenAccessControlSandbox key={Date.now()} />} />
             <Route path="/cryptographic-failures" element={<CryptographicFailures />} />
+            <Route path="/cryptographic-failures/demo" element={<CryptographicFailuresSandbox />} />
             <Route path="/injection" element={<Injection />} />
             <Route path="/insecure-design" element={<InsecureDesign />} />
             <Route path="/security-misconfiguration" element={<SecurityMisconfiguration />} />

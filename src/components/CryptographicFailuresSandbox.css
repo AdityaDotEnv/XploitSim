@@ -1,0 +1,73 @@
+/* CryptographicFailuresSandbox.css
+   Minimal layout helpers for the sandbox page.
+   Uses site colors from VulnerabilityPage.css; this file only defines grid/spacing.
+*/
+
+.sandbox-grid {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 980px) {
+  .sandbox-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* left & right panels (slightly transparent to match site) */
+.sandbox-left, .sandbox-right {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 16px;
+  border-radius: 12px;
+  min-height: 200px;
+}
+
+/* results list */
+.results-list { display: flex; flex-direction: column; gap: 12px; max-height: 60vh; overflow-y: auto; padding-right: 8px; }
+
+/* result card */
+.result-card {
+  background: rgba(0,0,0,0.3);
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* result row splits left / right */
+.result-row { display: flex; gap: 12px; align-items: flex-start; }
+.result-left { flex: 1; min-width: 0; }
+.result-right { width: 300px; max-width: 300px; background: rgba(255,255,255,0.02); border-radius: 8px; padding: 10px; border: 1px solid rgba(255,255,255,0.02); }
+
+/* pre formatting */
+.result-pre { background: #0b1220; color: #e6eef7; padding: 10px; border-radius: 6px; margin-top: 8px; font-size: 0.9rem; overflow-x: auto; }
+
+/* buttons group spacing (uses your frontend-btn class from VulnerabilityPage.css) */
+.sandbox-buttons { display:flex; flex-wrap:wrap; gap:10px; margin-top: 10px; }
+
+/* small responsive tweaks */
+@media (max-width: 480px) {
+  .result-right { display: none; } /* stack vertically on very small screens */
+  .result-row { flex-direction: column; }
+}
+.sandbox-left .vp-section {
+  margin-bottom: 20px;
+}
+
+.vp-section h2 {
+  margin-bottom: 10px;
+}
+
+.results-list {
+  padding: 10px 8px;
+}
+
+.result-pre {
+  background: #0d172a;
+  line-height: 1.4;
+}
