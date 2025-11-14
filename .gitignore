@@ -83,3 +83,4 @@ coverage/
 # ignore local server DB folders
 server/*/db/
 server/*/db/*.sqlite
+node_modules/
