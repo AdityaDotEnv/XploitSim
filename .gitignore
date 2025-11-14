@@ -50,7 +50,7 @@ Desktop.ini
 .vscode/
 .idea/
 *.suo
-.ntvs
+*.ntvs*
 *.njsproj
 *.sln
 
@@ -82,4 +82,4 @@ coverage/
 
 # ignore local server DB folders
 server/*/db/
-server//db/.sqlite
+server/*/db/*.sqlite
