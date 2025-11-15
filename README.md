@@ -31,9 +31,10 @@ Each vulnerability is implemented as an **independent backend microservice** and
 | **A03**  | Injection                                   | 5100  | ✅ Active   |
 | **A04**  | Insecure Design                             | 5200  | ✅ Active   |
 | **A05**  | Security Misconfiguration                   | 5300  | ✅ Active   |
-| **A06**  | Vulnerable & Outdated Components           | 5050  | ✅ Active      |
-| **A07**  | Authentication Failures                    | N/A  | ✅ Active   |
-| **A08**  | Software & Data Integrity Failures         | 5400  | ✅ Active    |
+| **A06**  | Vulnerable & Outdated Components           | 5050  | ✅ Active   |
+| **A07**  | Authentication Failures                    | N/A   | ✅ Active   |
+| **A08**  | Software & Data Integrity Failures         | 5400  | ✅ Active   |
+| **A10**  | Server-Side Request Forgery (SSRF)         | 5500  | ✅ Active   |
 
 ---
 
@@ -95,6 +96,20 @@ Each vulnerability is implemented as an **independent backend microservice** and
 - Runs on **127.0.0.1:5400**  
 - “Try it Yourself” toggle loads the interactive demo  
 
+### 🔄 **A10 – Server-Side Request Forgery (SSRF)**  *(NEW)*
+- Allows user-supplied URLs to be fetched by the backend  
+- Demonstrates how attackers:
+  - Access internal network services  
+  - Query cloud metadata endpoints  
+  - Perform internal port scanning  
+  - Bypass firewalls via the backend  
+- Demo features:
+  - Input box for arbitrary URLs  
+  - Examples card with common SSRF payloads  
+  - Response viewer showing internal service leaks  
+- Runs on **127.0.0.1:5500**  
+- Includes unsafe endpoint (`/api/ssrf`) + safe comparison endpoint
+
 ---
 
 # 🛠️ Setup & Configuration
@@ -124,8 +139,9 @@ npm install --prefix cryptographic-failures
 npm install --prefix injection  
 npm install --prefix insecure-design  
 npm install --prefix security-misconfiguration  
-npm install --prefix vulnerable-components  
-npm install --prefix software-data-integrity     # NEW
+npm install --prefix vulnerable-components
+npm install --prefix software-data-integrity  
+npm install --prefix server-side-request-forgery
 
 ---
 
@@ -154,6 +170,7 @@ This launches:
 - A05 → http://localhost:5300  
 - A06 → http://127.0.0.1:5050  
 - A08 → http://127.0.0.1:5400  
+- A10 → http://127.0.0.1:5500
 
 ---
 
@@ -176,7 +193,7 @@ Optimized build located in:
 
 ./build
 
-Ready for deployment to Netlify, Vercel, or static hosting.
+Deployable to Netlify, Vercel, or static hosting.
 
 ---
 
@@ -220,4 +237,3 @@ Instead of static definitions, users can:
 
 **Goal:**  
 > Make every OWASP Top 10 vulnerability accessible, interactive, and safe for learners worldwide.
-
