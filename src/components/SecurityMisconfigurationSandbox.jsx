@@ -11,22 +11,27 @@ export default function SecurityMisconfigurationSandbox() {
   const [filename, setFilename] = useState("test.txt");
 
   function appendLog(msg) {
-    setLogs((l) =>
-      [new Date().toLocaleTimeString() + " — " + msg, ...l].slice(0, 50)
-    );
+    setLogs((l) => [
+      new Date().toLocaleTimeString() + " — " + msg,
+      ...l,
+    ].slice(0, 50));
   }
 
   async function doFetch(path, opts = {}, target = "vulnerable") {
     const url = `${API_BASE}${path}`;
     appendLog(`Calling ${url}`);
+
     try {
       const res = await fetch(url, opts);
       const text = await res.text();
       const display = `HTTP ${res.status}\n${text}`;
+
       if (target === "vulnerable") setVulnerableResp(display);
       else setSafeResp(display);
+
     } catch (err) {
       appendLog(`Fetch error: ${err.message}`);
+
       if (target === "vulnerable") setVulnerableResp(String(err));
       else setSafeResp(String(err));
     }
@@ -67,7 +72,7 @@ export default function SecurityMisconfigurationSandbox() {
 
   return (
     <div className={styles.container}>
-      {/* Hero Section */}
+      {/* Hero */}
       <div className={styles.hero}>
         <div className={styles.badge}>Security Misconfiguration</div>
         <h1 className={styles.title}>Security Misconfiguration — Sandbox</h1>
@@ -77,7 +82,7 @@ export default function SecurityMisconfigurationSandbox() {
         </p>
       </div>
 
-      {/* Controls Section */}
+      {/* Controls */}
       <div className={styles.controls}>
         <div className={styles.row}>
           <button className={styles.buttons} onClick={fetchVulnerableDefaults}>
@@ -140,7 +145,7 @@ export default function SecurityMisconfigurationSandbox() {
         </div>
       </div>
 
-      {/* Results Grid */}
+      {/* Results */}
       <div className={styles.results}>
         <div className={styles.card}>
           <h3>📉 Vulnerable Response</h3>
@@ -151,7 +156,9 @@ export default function SecurityMisconfigurationSandbox() {
 
         <div className={styles.card}>
           <h3>📈 Safe Response</h3>
-          <pre className={styles.pre}>{safeResp || "No response yet."}</pre>
+          <pre className={styles.pre}>
+            {safeResp || "No response yet."}
+          </pre>
         </div>
 
         <div className={styles.card}>
@@ -164,89 +171,60 @@ export default function SecurityMisconfigurationSandbox() {
         </div>
       </div>
 
-      {/* Tips Section */}
+      {/* Sandbox Instructions */}
       <div className={styles.tips}>
         <h4>🎓 How to Use This Sandbox</h4>
         <ul>
           <li>
             <b>Fetch Vulnerable Defaults:</b> Shows exposed default credentials
-            and insecure config values — a common real-world misconfiguration.
+            and insecure config values.
           </li>
-
           <li>
-            <b>Fetch Safe Defaults:</b> Returns only non-sensitive configuration
-            fields, demonstrating secure system setup.
+            <b>Fetch Safe Defaults:</b> Returns only non-sensitive config fields.
           </li>
-
           <li>
-            <b>Check Vulnerable Headers:</b> Returns a response missing security
-            headers like
-            <code>HSTS</code>, <code>CSP</code>, and{" "}
-            <code>X-Frame-Options</code>.
+            <b>Check Vulnerable Headers:</b> Missing HSTS, CSP, X-Frame-Options.
           </li>
-
           <li>
-            <b>Check Safe Headers:</b> Shows how proper headers protect against
-            clickjacking, MIME-sniffing, and downgrade attacks.
+            <b>Check Safe Headers:</b> Demonstrates secure header configuration.
           </li>
-
           <li>
-            <b>Fetch Vulnerable Files:</b> Simulates a server with directory
-            listing enabled — attackers can see internal files.
+            <b>Fetch Vulnerable Files:</b> Shows directory listing — dangerous.
           </li>
-
           <li>
-            <b>Fetch Safe Files:</b> Only returns sanitized or allowed listings
-            (or forbids access).
+            <b>Fetch Safe Files:</b> Returns sanitized listing or forbids access.
           </li>
-
           <li>
-            <b>Delete File (Vulnerable):</b> No authentication required — any
-            user can delete files. Try deleting <code>test.txt</code>.
+            <b>Delete File (Vulnerable):</b> No authentication required.
           </li>
-
           <li>
-            <b>Delete File (Safe):</b> Requires an admin token. Demonstrates
-            proper authorization.
+            <b>Delete File (Safe):</b> Requires admin token.
           </li>
-
           <li>
-            <b>Trigger Vulnerable Error:</b> Generates an error with a full
-            stack trace — a major information disclosure flaw.
+            <b>Trigger Vulnerable Error:</b> Leaks full stack trace.
           </li>
-
           <li>
-            <b>Trigger Safe Error:</b> Returns a minimal, generic error message
-            without leaking internal details.
+            <b>Trigger Safe Error:</b> Shows only generic error.
           </li>
-
           <li>
-            <b>Check Vulnerable CORS:</b> Shows{" "}
-            <code>Access-Control-Allow-Origin: *</code>, demonstrating overly
-            permissive cross-domain sharing.
+            <b>Check Vulnerable CORS:</b> Shows `Access-Control-Allow-Origin: *`
           </li>
-
           <li>
-            <b>Check Safe CORS:</b> Restricts requests to the approved origin
-            only.
+            <b>Check Safe CORS:</b> Restricts to trusted origin only.
           </li>
         </ul>
       </div>
 
+      {/* Learning Tips */}
       <div className={styles.tips}>
         <h4>💡 Learning Tips</h4>
         <ul>
-          <li>Never leave default credentials active in production systems.</li>
-          <li>Always configure strict and explicit security headers.</li>
-          <li>Disable directory listing on all servers.</li>
-          <li>
-            Restrict sensitive actions using proper authentication and
-            authorization.
-          </li>
-          <li>
-            Show only generic error messages — log full details internally.
-          </li>
-          <li>Avoid permissive CORS rules; allow only trusted origins.</li>
+          <li>Never leave default credentials in production.</li>
+          <li>Always configure strict security headers.</li>
+          <li>Disable directory listing everywhere.</li>
+          <li>Use proper authentication for sensitive actions.</li>
+          <li>Show only generic error messages to users.</li>
+          <li>Avoid permissive CORS rules.</li>
         </ul>
       </div>
     </div>
