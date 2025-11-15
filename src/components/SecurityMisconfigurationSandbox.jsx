@@ -1,67 +1,69 @@
-import React, { useState } from 'react';
-import styles from './SecurityMisconfigurationSandbox.module.css';
+import React, { useState } from "react";
+import styles from "./SecurityMisconfigurationSandbox.module.css";
 
 // Vite-compatible environment variable fallback
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5300';
+const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5300";
 
 export default function SecurityMisconfigurationSandbox() {
-  const [vulnerableResp, setVulnerableResp] = useState('');
-  const [safeResp, setSafeResp] = useState('');
+  const [vulnerableResp, setVulnerableResp] = useState("");
+  const [safeResp, setSafeResp] = useState("");
   const [logs, setLogs] = useState([]);
-  const [filename, setFilename] = useState('test.txt');
+  const [filename, setFilename] = useState("test.txt");
 
   function appendLog(msg) {
-    setLogs(l => [new Date().toLocaleTimeString() + ' — ' + msg, ...l].slice(0, 50));
+    setLogs((l) =>
+      [new Date().toLocaleTimeString() + " — " + msg, ...l].slice(0, 50)
+    );
   }
 
-  async function doFetch(path, opts = {}, target = 'vulnerable') {
+  async function doFetch(path, opts = {}, target = "vulnerable") {
     const url = `${API_BASE}${path}`;
     appendLog(`Calling ${url}`);
     try {
       const res = await fetch(url, opts);
       const text = await res.text();
       const display = `HTTP ${res.status}\n${text}`;
-      if (target === 'vulnerable') setVulnerableResp(display);
+      if (target === "vulnerable") setVulnerableResp(display);
       else setSafeResp(display);
     } catch (err) {
       appendLog(`Fetch error: ${err.message}`);
-      if (target === 'vulnerable') setVulnerableResp(String(err));
+      if (target === "vulnerable") setVulnerableResp(String(err));
       else setSafeResp(String(err));
     }
   }
 
   // Vulnerable actions
-  const fetchVulnerableDefaults = () => doFetch('/vulnerable/defaults');
-  const fetchVulnerableHeaders = () => doFetch('/vulnerable/headers');
-  const fetchVulnerableFiles = () => doFetch('/vulnerable/files');
+  const fetchVulnerableDefaults = () => doFetch("/vulnerable/defaults");
+  const fetchVulnerableHeaders = () => doFetch("/vulnerable/headers");
+  const fetchVulnerableFiles = () => doFetch("/vulnerable/files");
   const deleteVulnerableFile = () =>
-    doFetch('/vulnerable/delete-file', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ filename })
+    doFetch("/vulnerable/delete-file", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ filename }),
     });
-  const triggerVulnerableError = () => doFetch('/vulnerable/error?debug=true');
-  const checkVulnerableCors = () => doFetch('/vulnerable/cors');
+  const triggerVulnerableError = () => doFetch("/vulnerable/error?debug=true");
+  const checkVulnerableCors = () => doFetch("/vulnerable/cors");
 
   // Safe actions
-  const fetchSafeDefaults = () => doFetch('/safe/defaults', {}, 'safe');
-  const fetchSafeHeaders = () => doFetch('/safe/headers', {}, 'safe');
-  const fetchSafeFiles = () => doFetch('/safe/files', {}, 'safe');
+  const fetchSafeDefaults = () => doFetch("/safe/defaults", {}, "safe");
+  const fetchSafeHeaders = () => doFetch("/safe/headers", {}, "safe");
+  const fetchSafeFiles = () => doFetch("/safe/files", {}, "safe");
   const deleteSafeFile = () =>
     doFetch(
-      '/safe/delete-file',
+      "/safe/delete-file",
       {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'x-admin-token': 'let-me-admin'
+          "Content-Type": "application/json",
+          "x-admin-token": "let-me-admin",
         },
-        body: JSON.stringify({ filename })
+        body: JSON.stringify({ filename }),
       },
-      'safe'
+      "safe"
     );
-  const triggerSafeError = () => doFetch('/safe/error', {}, 'safe');
-  const checkSafeCors = () => doFetch('/safe/cors', {}, 'safe');
+  const triggerSafeError = () => doFetch("/safe/error", {}, "safe");
+  const checkSafeCors = () => doFetch("/safe/cors", {}, "safe");
 
   return (
     <div className={styles.container}>
@@ -70,7 +72,8 @@ export default function SecurityMisconfigurationSandbox() {
         <div className={styles.badge}>Security Misconfiguration</div>
         <h1 className={styles.title}>Security Misconfiguration — Sandbox</h1>
         <p className={styles.lead}>
-          Compare intentionally insecure endpoints with safe alternatives. <strong>Local use only.</strong>
+          Compare intentionally insecure endpoints with safe alternatives.{" "}
+          <strong>Local use only.</strong>
         </p>
       </div>
 
@@ -107,7 +110,7 @@ export default function SecurityMisconfigurationSandbox() {
           <input
             className={styles.input}
             value={filename}
-            onChange={e => setFilename(e.target.value)}
+            onChange={(e) => setFilename(e.target.value)}
             placeholder="filename e.g. test.txt"
           />
           <button className={styles.buttons} onClick={deleteVulnerableFile}>
@@ -141,18 +144,22 @@ export default function SecurityMisconfigurationSandbox() {
       <div className={styles.results}>
         <div className={styles.card}>
           <h3>📉 Vulnerable Response</h3>
-          <pre className={styles.pre}>{vulnerableResp || 'No response yet.'}</pre>
+          <pre className={styles.pre}>
+            {vulnerableResp || "No response yet."}
+          </pre>
         </div>
 
         <div className={styles.card}>
           <h3>📈 Safe Response</h3>
-          <pre className={styles.pre}>{safeResp || 'No response yet.'}</pre>
+          <pre className={styles.pre}>{safeResp || "No response yet."}</pre>
         </div>
 
         <div className={styles.card}>
           <h3>📝 Logs / Notes</h3>
           <div className={styles.pre}>
-            {logs.length === 0 ? 'No logs yet.' : logs.map((l, i) => <div key={i}>{l}</div>)}
+            {logs.length === 0
+              ? "No logs yet."
+              : logs.map((l, i) => <div key={i}>{l}</div>)}
           </div>
         </div>
       </div>
@@ -162,59 +169,66 @@ export default function SecurityMisconfigurationSandbox() {
         <h4>🎓 How to Use This Sandbox</h4>
         <ul>
           <li>
-            <b>Fetch Vulnerable Defaults:</b> Shows exposed default credentials and insecure config
-            values — a common real-world misconfiguration.
+            <b>Fetch Vulnerable Defaults:</b> Shows exposed default credentials
+            and insecure config values — a common real-world misconfiguration.
           </li>
 
           <li>
-            <b>Fetch Safe Defaults:</b> Returns only non-sensitive configuration fields, demonstrating
-            secure system setup.
+            <b>Fetch Safe Defaults:</b> Returns only non-sensitive configuration
+            fields, demonstrating secure system setup.
           </li>
 
           <li>
-            <b>Check Vulnerable Headers:</b> Returns a response missing security headers like
-            <code>HSTS</code>, <code>CSP</code>, and <code>X-Frame-Options</code>.
+            <b>Check Vulnerable Headers:</b> Returns a response missing security
+            headers like
+            <code>HSTS</code>, <code>CSP</code>, and{" "}
+            <code>X-Frame-Options</code>.
           </li>
 
           <li>
-            <b>Check Safe Headers:</b> Shows how proper headers protect against clickjacking,
-            MIME-sniffing, and downgrade attacks.
+            <b>Check Safe Headers:</b> Shows how proper headers protect against
+            clickjacking, MIME-sniffing, and downgrade attacks.
           </li>
 
           <li>
-            <b>Fetch Vulnerable Files:</b> Simulates a server with directory listing enabled —
-            attackers can see internal files.
+            <b>Fetch Vulnerable Files:</b> Simulates a server with directory
+            listing enabled — attackers can see internal files.
           </li>
 
           <li>
-            <b>Fetch Safe Files:</b> Only returns sanitized or allowed listings (or forbids access).
+            <b>Fetch Safe Files:</b> Only returns sanitized or allowed listings
+            (or forbids access).
           </li>
 
           <li>
-            <b>Delete File (Vulnerable):</b> No authentication required — any user can delete files.
-            Try deleting <code>test.txt</code>.
+            <b>Delete File (Vulnerable):</b> No authentication required — any
+            user can delete files. Try deleting <code>test.txt</code>.
           </li>
 
           <li>
-            <b>Delete File (Safe):</b> Requires an admin token. Demonstrates proper authorization.
+            <b>Delete File (Safe):</b> Requires an admin token. Demonstrates
+            proper authorization.
           </li>
 
           <li>
-            <b>Trigger Vulnerable Error:</b> Generates an error with a full stack trace — a major
-            information disclosure flaw.
+            <b>Trigger Vulnerable Error:</b> Generates an error with a full
+            stack trace — a major information disclosure flaw.
           </li>
 
           <li>
-            <b>Trigger Safe Error:</b> Returns a minimal, generic error message without leaking internal details.
+            <b>Trigger Safe Error:</b> Returns a minimal, generic error message
+            without leaking internal details.
           </li>
 
           <li>
-            <b>Check Vulnerable CORS:</b> Shows <code>Access-Control-Allow-Origin: *</code>,
-            demonstrating overly permissive cross-domain sharing.
+            <b>Check Vulnerable CORS:</b> Shows{" "}
+            <code>Access-Control-Allow-Origin: *</code>, demonstrating overly
+            permissive cross-domain sharing.
           </li>
 
           <li>
-            <b>Check Safe CORS:</b> Restricts requests to the approved origin only.
+            <b>Check Safe CORS:</b> Restricts requests to the approved origin
+            only.
           </li>
         </ul>
       </div>
@@ -225,8 +239,13 @@ export default function SecurityMisconfigurationSandbox() {
           <li>Never leave default credentials active in production systems.</li>
           <li>Always configure strict and explicit security headers.</li>
           <li>Disable directory listing on all servers.</li>
-          <li>Restrict sensitive actions using proper authentication and authorization.</li>
-          <li>Show only generic error messages — log full details internally.</li>
+          <li>
+            Restrict sensitive actions using proper authentication and
+            authorization.
+          </li>
+          <li>
+            Show only generic error messages — log full details internally.
+          </li>
           <li>Avoid permissive CORS rules; allow only trusted origins.</li>
         </ul>
       </div>
