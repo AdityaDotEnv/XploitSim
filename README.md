@@ -32,6 +32,7 @@ Each vulnerability is implemented as an **independent backend microservice** and
 | **A04**  | Insecure Design                             | 5200  | ✅ Active   |
 | **A05**  | Security Misconfiguration                   | 5300  | ✅ Active   |
 | **A06**  | Vulnerable & Outdated Components           | 5050  | ✅ Active      |
+| **A07**  | Authentication Failures                    | N/A  | ✅ Active   |
 | **A08**  | Software & Data Integrity Failures         | 5400  | ✅ Active    |
 
 ---
@@ -70,6 +71,22 @@ Each vulnerability is implemented as an **independent backend microservice** and
 - Demonstrates supply-chain risks  
 - Simple fetch demo  
 - Runs on **127.0.0.1:5050**
+
+### 🔐 **A07 – Authentication Failures**
+- Demonstrates common authentication weaknesses:
+  - Weak password policies and insecure password storage  
+  - Brute force / credential stuffing simulations  
+  - Session management flaws (predictable session IDs, missing expiration)  
+  - Missing multi-factor authentication (MFA) and ineffective account lockout  
+- Demo features:
+  - A manual login & registration flow that stores credentials in a sandbox DB
+  - An automated credential-stuffing tool to visualize brute-force impact
+  - Account lockout and rate-limit bypass examples
+  - Console logs showing attack progression to aid learning
+- Typical learning outcomes:
+  - How poor password & session handling leads to account takeover
+  - How MFA and secure session handling mitigate attacks
+  - Practical remediation steps (hashing salts, bcrypt/argon2, rate limiting, MFA)
 
 ### 🧩 **A08 – Software & Data Integrity Failures**
 - Demonstrates unsigned/tampered update packages  
