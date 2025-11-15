@@ -1,17 +1,24 @@
-import React from 'react';
-import './VulnerabilityPage.css';
+import { useState } from "react";
+import SecurityLoggingFailuresDemo from "./SecurityLoggingFailuresDemo";
+import React from "react";
+import "./VulnerabilityPage.css";
 
 const SecurityLoggingFailures = () => {
+  const [showDemo, setShowDemo] = useState(false);
+
   return (
     <div className="vulnerability-page">
       <section className="vp-hero">
         <div className="vp-hero-content">
           <div className="vp-hero-text">
             <div className="vp-badge">A09:2021</div>
-            <h1 className="vp-title">Security Logging and Monitoring Failures</h1>
+            <h1 className="vp-title">
+              Security Logging and Monitoring Failures
+            </h1>
             <p className="vp-subtitle">
-              Insufficient logging and monitoring, coupled with missing or ineffective integration with incident response, 
-              allows attackers to further attack systems and maintain persistence.
+              Insufficient logging and monitoring, coupled with missing or
+              ineffective integration with incident response, allows attackers
+              to further attack systems and maintain persistence.
             </p>
             <div className="vp-stats">
               <div className="vp-stat">
@@ -43,21 +50,33 @@ const SecurityLoggingFailures = () => {
           <div className="vp-overview-grid">
             <div className="vp-overview-content">
               <p>
-                Insufficient logging and monitoring, coupled with missing or ineffective integration with incident response, 
-                allows attackers to further attack systems, maintain persistence, pivot to more systems, and tamper, extract, or destroy data.
+                Insufficient logging and monitoring, coupled with missing or
+                ineffective integration with incident response, allows attackers
+                to further attack systems, maintain persistence, pivot to more
+                systems, and tamper, extract, or destroy data.
               </p>
               <p>
-                Most breach studies show time to detect a breach is over 200 days, typically detected by external parties 
-                rather than internal processes or monitoring. This category is to help detect, escalate, and respond to active breaches.
+                Most breach studies show time to detect a breach is over 200
+                days, typically detected by external parties rather than
+                internal processes or monitoring. This category is to help
+                detect, escalate, and respond to active breaches.
               </p>
               <div className="vp-impact-box">
                 <h4>🚨 Logging Failure Impacts</h4>
                 <ul>
                   <li>Extended breach duration without detection</li>
-                  <li>Inability to investigate security incidents effectively</li>
-                  <li>Failure to meet compliance and regulatory requirements</li>
-                  <li>Difficulty in identifying attack patterns and threat actors</li>
-                  <li>Increased damage and data loss from undetected attacks</li>
+                  <li>
+                    Inability to investigate security incidents effectively
+                  </li>
+                  <li>
+                    Failure to meet compliance and regulatory requirements
+                  </li>
+                  <li>
+                    Difficulty in identifying attack patterns and threat actors
+                  </li>
+                  <li>
+                    Increased damage and data loss from undetected attacks
+                  </li>
                 </ul>
               </div>
             </div>
@@ -104,7 +123,10 @@ const SecurityLoggingFailures = () => {
             <div className="vp-vector-card vp-critical">
               <div className="vp-vector-icon">🚫</div>
               <h3>No Security Event Logging</h3>
-              <p>Failure to log security-relevant events like logins, access control failures, or server-side input validation.</p>
+              <p>
+                Failure to log security-relevant events like logins, access
+                control failures, or server-side input validation.
+              </p>
               <div className="vp-vector-example">
                 <code>No logging of failed authentication attempts</code>
               </div>
@@ -112,7 +134,10 @@ const SecurityLoggingFailures = () => {
             <div className="vp-vector-card vp-high">
               <div className="vp-vector-icon">🔕</div>
               <h3>No Alerting Mechanisms</h3>
-              <p>Security events are logged but no alerts are generated for suspicious activities or thresholds.</p>
+              <p>
+                Security events are logged but no alerts are generated for
+                suspicious activities or thresholds.
+              </p>
               <div className="vp-vector-example">
                 <code>No alerts for multiple failed logins from same IP</code>
               </div>
@@ -120,7 +145,10 @@ const SecurityLoggingFailures = () => {
             <div className="vp-vector-card vp-high">
               <div className="vp-vector-icon">📊</div>
               <h3>Insufficient Log Details</h3>
-              <p>Logs that don't capture sufficient context to investigate security incidents effectively.</p>
+              <p>
+                Logs that don't capture sufficient context to investigate
+                security incidents effectively.
+              </p>
               <div className="vp-vector-example">
                 <code>Logs without timestamps, user IDs, or source IPs</code>
               </div>
@@ -128,7 +156,10 @@ const SecurityLoggingFailures = () => {
             <div className="vp-vector-card vp-medium">
               <div className="vp-vector-icon">🗑️</div>
               <h3>Log Tampering</h3>
-              <p>Logs that can be altered or deleted by attackers to cover their tracks and avoid detection.</p>
+              <p>
+                Logs that can be altered or deleted by attackers to cover their
+                tracks and avoid detection.
+              </p>
               <div className="vp-vector-example">
                 <code>World-writable log files or directories</code>
               </div>
@@ -136,7 +167,10 @@ const SecurityLoggingFailures = () => {
             <div className="vp-vector-card vp-medium">
               <div className="vp-vector-icon">⏰</div>
               <h3>No Log Retention</h3>
-              <p>Inadequate log retention policies that prevent historical analysis of security incidents.</p>
+              <p>
+                Inadequate log retention policies that prevent historical
+                analysis of security incidents.
+              </p>
               <div className="vp-vector-example">
                 <code>7-day log retention for compliance requiring 1 year</code>
               </div>
@@ -144,7 +178,10 @@ const SecurityLoggingFailures = () => {
             <div className="vp-vector-card vp-critical">
               <div className="vp-vector-icon">🔍</div>
               <h3>No Real-time Monitoring</h3>
-              <p>Lack of real-time log analysis and security monitoring to detect attacks as they happen.</p>
+              <p>
+                Lack of real-time log analysis and security monitoring to detect
+                attacks as they happen.
+              </p>
               <div className="vp-vector-example">
                 <code>Manual log review instead of automated monitoring</code>
               </div>
@@ -162,7 +199,11 @@ const SecurityLoggingFailures = () => {
               <div className="vp-timeline-year">2020</div>
               <div className="vp-timeline-content">
                 <h4>SolarWinds Monitoring Gap</h4>
-                <p>Inadequate monitoring allowed attackers to operate undetected for months within SolarWinds' network, distributing malicious updates to thousands of organizations.</p>
+                <p>
+                  Inadequate monitoring allowed attackers to operate undetected
+                  for months within SolarWinds' network, distributing malicious
+                  updates to thousands of organizations.
+                </p>
                 <div className="vp-breach-impact">
                   <span className="vp-impact-badge">Months Undetected</span>
                   <span className="vp-impact-badge">18K Organizations</span>
@@ -173,7 +214,11 @@ const SecurityLoggingFailures = () => {
               <div className="vp-timeline-year">2019</div>
               <div className="vp-timeline-content">
                 <h4>Capital One Detection Failure</h4>
-                <p>Poor logging and monitoring allowed an attacker to exfiltrate 100 million customer records over several months without triggering alerts.</p>
+                <p>
+                  Poor logging and monitoring allowed an attacker to exfiltrate
+                  100 million customer records over several months without
+                  triggering alerts.
+                </p>
                 <div className="vp-breach-impact">
                   <span className="vp-impact-badge">100M Records</span>
                   <span className="vp-impact-badge">Months Undetected</span>
@@ -184,7 +229,11 @@ const SecurityLoggingFailures = () => {
               <div className="vp-timeline-year">2018</div>
               <div className="vp-timeline-content">
                 <h4>Marriott Starwood Breach</h4>
-                <p>Insufficient monitoring allowed attackers to maintain access to Starwood's reservation system for four years, affecting 500 million guests.</p>
+                <p>
+                  Insufficient monitoring allowed attackers to maintain access
+                  to Starwood's reservation system for four years, affecting 500
+                  million guests.
+                </p>
                 <div className="vp-breach-impact">
                   <span className="vp-impact-badge">4 Years Access</span>
                   <span className="vp-impact-badge">500M Guests</span>
@@ -205,15 +254,24 @@ const SecurityLoggingFailures = () => {
               <div className="vp-strategy-list">
                 <div className="vp-strategy">
                   <h4>Security Event Logging</h4>
-                  <p>Log all security-relevant events including authentication, access control, and input validation.</p>
+                  <p>
+                    Log all security-relevant events including authentication,
+                    access control, and input validation.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Sufficient Context</h4>
-                  <p>Include timestamps, source IPs, user IDs, and event details in all security logs.</p>
+                  <p>
+                    Include timestamps, source IPs, user IDs, and event details
+                    in all security logs.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Structured Logging</h4>
-                  <p>Use structured logging formats (JSON) for easier parsing and analysis.</p>
+                  <p>
+                    Use structured logging formats (JSON) for easier parsing and
+                    analysis.
+                  </p>
                 </div>
               </div>
             </div>
@@ -222,15 +280,24 @@ const SecurityLoggingFailures = () => {
               <div className="vp-strategy-list">
                 <div className="vp-strategy">
                   <h4>Real-time Alerting</h4>
-                  <p>Implement real-time alerts for suspicious activities and security thresholds.</p>
+                  <p>
+                    Implement real-time alerts for suspicious activities and
+                    security thresholds.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>SIEM Integration</h4>
-                  <p>Use Security Information and Event Management systems for centralized monitoring.</p>
+                  <p>
+                    Use Security Information and Event Management systems for
+                    centralized monitoring.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Anomaly Detection</h4>
-                  <p>Implement behavioral analytics to detect unusual patterns and potential threats.</p>
+                  <p>
+                    Implement behavioral analytics to detect unusual patterns
+                    and potential threats.
+                  </p>
                 </div>
               </div>
             </div>
@@ -239,15 +306,24 @@ const SecurityLoggingFailures = () => {
               <div className="vp-strategy-list">
                 <div className="vp-strategy">
                   <h4>Secure Log Storage</h4>
-                  <p>Protect logs from tampering through proper access controls and integrity checks.</p>
+                  <p>
+                    Protect logs from tampering through proper access controls
+                    and integrity checks.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Adequate Retention</h4>
-                  <p>Maintain logs for sufficient duration to meet compliance and investigation needs.</p>
+                  <p>
+                    Maintain logs for sufficient duration to meet compliance and
+                    investigation needs.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Incident Response</h4>
-                  <p>Integrate logging with incident response processes for rapid detection and response.</p>
+                  <p>
+                    Integrate logging with incident response processes for rapid
+                    detection and response.
+                  </p>
                 </div>
               </div>
             </div>
@@ -331,7 +407,19 @@ try {
             </div>
           </div>
         </div>
-        <button type="button" class="btn btn-outline-warning">Try it Yourself</button>
+        <button
+          type="button"
+          className="btn btn-outline-warning"
+          onClick={() => setShowDemo(!showDemo)}
+        >
+          {showDemo ? "Hide Demo" : "Try it Yourself"}
+        </button>
+
+        {showDemo && (
+          <div style={{ marginTop: "20px" }}>
+            <SecurityLoggingFailuresDemo />
+          </div>
+        )}
       </section>
 
       {/* Resources */}
@@ -339,22 +427,34 @@ try {
         <div className="vp-container">
           <h2>Additional Resources</h2>
           <div className="vp-resources-grid">
-            <a href="https://owasp.org/Top10/A09_2021-Security_Logging_and_Monitoring_Failures/" className="vp-resource-card">
+            <a
+              href="https://owasp.org/Top10/A09_2021-Security_Logging_and_Monitoring_Failures/"
+              className="vp-resource-card"
+            >
               <div className="vp-resource-icon">📚</div>
               <h3>OWASP Logging Guide</h3>
               <p>Complete guide to security logging and monitoring</p>
             </a>
-            <a href="https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html" className="vp-resource-card">
+            <a
+              href="https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html"
+              className="vp-resource-card"
+            >
               <div className="vp-resource-icon">🛡️</div>
               <h3>Logging Cheat Sheet</h3>
               <p>Comprehensive logging security practices</p>
             </a>
-            <a href="https://www.elastic.co/guide/en/ecs/current/index.html" className="vp-resource-card">
+            <a
+              href="https://www.elastic.co/guide/en/ecs/current/index.html"
+              className="vp-resource-card"
+            >
               <div className="vp-resource-icon">🔍</div>
               <h3>Elastic Common Schema</h3>
               <p>Standardized logging schema for security monitoring</p>
             </a>
-            <a href="https://cwe.mitre.org/data/definitions/778.html" className="vp-resource-card">
+            <a
+              href="https://cwe.mitre.org/data/definitions/778.html"
+              className="vp-resource-card"
+            >
               <div className="vp-resource-icon">📋</div>
               <h3>CWE-778: Insufficient Logging</h3>
               <p>Common Weakness Enumeration for logging issues</p>

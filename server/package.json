@@ -2,9 +2,10 @@
   "name": "xploitsim-server",
   "version": "1.0.0",
   "scripts": {
-    "start": "concurrently \"npm --prefix broken-access-control start\" \"npm --prefix cryptographic-failures start\" \"npm --prefix injection start\" \"npm --prefix insecure-design start\" \"npm --prefix security-misconfiguration start\""
+    "start": "concurrently \"npm --prefix broken-access-control start\" \"npm --prefix cryptographic-failures start\" \"npm --prefix security-logging-failures start\" \"npm --prefix injection start\" \"npm --prefix insecure-design start\" \"npm --prefix vulnerable-components start\" \"npm --prefix security-misconfiguration start\" \"npm --prefix software-data-integrity start\" \"npm --prefix server-side-request-forgery start\""
   },
   "dependencies": {
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "sqlite3": "^5.1.7"
   }
 }
