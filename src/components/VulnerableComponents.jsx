@@ -1,7 +1,11 @@
-import React from 'react';
-import './VulnerabilityPage.css';
+import VulnerableComponentsDemo from "./VulnerableComponentsDemo";
+import { useState } from "react";
+import React from "react";
+import "./VulnerabilityPage.css";
 
 const VulnerableComponents = () => {
+  const [showDemo, setShowDemo] = useState(false);
+
   return (
     <div className="vulnerability-page">
       <section className="vp-hero">
@@ -10,8 +14,9 @@ const VulnerableComponents = () => {
             <div className="vp-badge">A06:2021</div>
             <h1 className="vp-title">Vulnerable Components</h1>
             <p className="vp-subtitle">
-              Using components with known vulnerabilities that can be exploited to compromise applications. 
-              This includes libraries, frameworks, and other software modules with unpatched security flaws.
+              Using components with known vulnerabilities that can be exploited
+              to compromise applications. This includes libraries, frameworks,
+              and other software modules with unpatched security flaws.
             </p>
             <div className="vp-stats">
               <div className="vp-stat">
@@ -43,15 +48,20 @@ const VulnerableComponents = () => {
           <div className="vp-overview-grid">
             <div className="vp-overview-content">
               <p>
-                Modern applications heavily rely on third-party components like libraries, frameworks, 
-                and software modules. When these components contain known vulnerabilities, they become easy targets for attackers. 
-                You are likely vulnerable if you don't know the versions of all components you use, if components are unsupported or outdated, 
-                or if you don't scan for vulnerabilities regularly.
+                Modern applications heavily rely on third-party components like
+                libraries, frameworks, and software modules. When these
+                components contain known vulnerabilities, they become easy
+                targets for attackers. You are likely vulnerable if you don't
+                know the versions of all components you use, if components are
+                unsupported or outdated, or if you don't scan for
+                vulnerabilities regularly.
               </p>
               <p>
-                Software composition analysis (SCA) tools can help, but they are only effective if used consistently 
-                and if the organization has a process to respond to the findings. The risk is amplified when components 
-                run with full privileges, have deep integration into the application, or are difficult to update.
+                Software composition analysis (SCA) tools can help, but they are
+                only effective if used consistently and if the organization has
+                a process to respond to the findings. The risk is amplified when
+                components run with full privileges, have deep integration into
+                the application, or are difficult to update.
               </p>
               <div className="vp-impact-box">
                 <h4>🚨 Component Risk Impacts</h4>
@@ -59,7 +69,9 @@ const VulnerableComponents = () => {
                   <li>Remote code execution through vulnerable dependencies</li>
                   <li>Data breaches via compromised third-party libraries</li>
                   <li>Supply chain attacks affecting multiple organizations</li>
-                  <li>Compliance violations due to unpatched vulnerabilities</li>
+                  <li>
+                    Compliance violations due to unpatched vulnerabilities
+                  </li>
                   <li>Reputation damage from preventable security incidents</li>
                 </ul>
               </div>
@@ -84,7 +96,9 @@ const VulnerableComponents = () => {
                   <div className="vp-step-number">3</div>
                   <div className="vp-step-content">
                     <strong>No Patching</strong>
-                    <span>Organization fails to update vulnerable component</span>
+                    <span>
+                      Organization fails to update vulnerable component
+                    </span>
                   </div>
                 </div>
                 <div className="vp-flow-step">
@@ -107,7 +121,11 @@ const VulnerableComponents = () => {
             <div className="vp-vector-card vp-critical">
               <div className="vp-vector-icon">🔄</div>
               <h3>Framework Vulnerabilities</h3>
-              <p>Security flaws in popular frameworks like Spring, Express.js, Django, or Ruby on Rails that affect all applications using them.</p>
+              <p>
+                Security flaws in popular frameworks like Spring, Express.js,
+                Django, or Ruby on Rails that affect all applications using
+                them.
+              </p>
               <div className="vp-vector-example">
                 <code>Spring Framework RCE (CVE-2022-22965)</code>
               </div>
@@ -115,7 +133,10 @@ const VulnerableComponents = () => {
             <div className="vp-vector-card vp-high">
               <div className="vp-vector-icon">📚</div>
               <h3>Library Dependencies</h3>
-              <p>Vulnerabilities in utility libraries for logging, serialization, XML parsing, or image processing.</p>
+              <p>
+                Vulnerabilities in utility libraries for logging, serialization,
+                XML parsing, or image processing.
+              </p>
               <div className="vp-vector-example">
                 <code>Log4Shell (CVE-2021-44228)</code>
               </div>
@@ -123,7 +144,10 @@ const VulnerableComponents = () => {
             <div className="vp-vector-card vp-high">
               <div className="vp-vector-icon">🗄️</div>
               <h3>Database Drivers</h3>
-              <p>Security issues in database connectors and ORM libraries that can lead to data exposure or system compromise.</p>
+              <p>
+                Security issues in database connectors and ORM libraries that
+                can lead to data exposure or system compromise.
+              </p>
               <div className="vp-vector-example">
                 <code>MySQL Connector/J vulnerabilities</code>
               </div>
@@ -131,7 +155,11 @@ const VulnerableComponents = () => {
             <div className="vp-vector-card vp-medium">
               <div className="vp-vector-icon">🖼️</div>
               <h3>UI Components</h3>
-              <p>Vulnerabilities in frontend libraries, CSS frameworks, or JavaScript components that enable XSS or other client-side attacks.</p>
+              <p>
+                Vulnerabilities in frontend libraries, CSS frameworks, or
+                JavaScript components that enable XSS or other client-side
+                attacks.
+              </p>
               <div className="vp-vector-example">
                 <code>jQuery XSS vulnerabilities</code>
               </div>
@@ -139,7 +167,10 @@ const VulnerableComponents = () => {
             <div className="vp-vector-card vp-critical">
               <div className="vp-vector-icon">🔌</div>
               <h3>Plugin Architecture</h3>
-              <p>Security flaws in plugin systems that allow malicious or vulnerable plugins to compromise the entire application.</p>
+              <p>
+                Security flaws in plugin systems that allow malicious or
+                vulnerable plugins to compromise the entire application.
+              </p>
               <div className="vp-vector-example">
                 <code>WordPress plugin vulnerabilities</code>
               </div>
@@ -147,7 +178,10 @@ const VulnerableComponents = () => {
             <div className="vp-vector-card vp-high">
               <div className="vp-vector-icon">📦</div>
               <h3>Container Images</h3>
-              <p>Vulnerable base images or container layers that introduce security risks into containerized applications.</p>
+              <p>
+                Vulnerable base images or container layers that introduce
+                security risks into containerized applications.
+              </p>
               <div className="vp-vector-example">
                 <code>Alpine Linux package vulnerabilities</code>
               </div>
@@ -165,7 +199,11 @@ const VulnerableComponents = () => {
               <div className="vp-timeline-year">2021</div>
               <div className="vp-timeline-content">
                 <h4>Log4Shell (CVE-2021-44228)</h4>
-                <p>Critical RCE vulnerability in Apache Log4j logging library affected millions of applications worldwide, enabling complete system takeover through log messages.</p>
+                <p>
+                  Critical RCE vulnerability in Apache Log4j logging library
+                  affected millions of applications worldwide, enabling complete
+                  system takeover through log messages.
+                </p>
                 <div className="vp-breach-impact">
                   <span className="vp-impact-badge">Millions of Apps</span>
                   <span className="vp-impact-badge">Critical RCE</span>
@@ -176,7 +214,11 @@ const VulnerableComponents = () => {
               <div className="vp-timeline-year">2017</div>
               <div className="vp-timeline-content">
                 <h4>Equifax Struts Vulnerability</h4>
-                <p>Failure to patch Apache Struts CVE-2017-5638 led to breach of 147 million consumer records, costing the company over $1.4 billion.</p>
+                <p>
+                  Failure to patch Apache Struts CVE-2017-5638 led to breach of
+                  147 million consumer records, costing the company over $1.4
+                  billion.
+                </p>
                 <div className="vp-breach-impact">
                   <span className="vp-impact-badge">147M Records</span>
                   <span className="vp-impact-badge">$1.4B Cost</span>
@@ -187,7 +229,11 @@ const VulnerableComponents = () => {
               <div className="vp-timeline-year">2016</div>
               <div className="vp-timeline-content">
                 <h4>Heartbleed OpenSSL</h4>
-                <p>Buffer over-read vulnerability in OpenSSL cryptographic library exposed private keys and sensitive memory contents from millions of web servers.</p>
+                <p>
+                  Buffer over-read vulnerability in OpenSSL cryptographic
+                  library exposed private keys and sensitive memory contents
+                  from millions of web servers.
+                </p>
                 <div className="vp-breach-impact">
                   <span className="vp-impact-badge">500K Servers</span>
                   <span className="vp-impact-badge">Crypto Breach</span>
@@ -208,15 +254,24 @@ const VulnerableComponents = () => {
               <div className="vp-strategy-list">
                 <div className="vp-strategy">
                   <h4>Software Bill of Materials</h4>
-                  <p>Maintain a complete inventory of all components and their versions using SBOM.</p>
+                  <p>
+                    Maintain a complete inventory of all components and their
+                    versions using SBOM.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Dependency Scanning</h4>
-                  <p>Use SCA tools to automatically identify all dependencies and their known vulnerabilities.</p>
+                  <p>
+                    Use SCA tools to automatically identify all dependencies and
+                    their known vulnerabilities.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>License Compliance</h4>
-                  <p>Track open-source licenses and ensure compliance with organizational policies.</p>
+                  <p>
+                    Track open-source licenses and ensure compliance with
+                    organizational policies.
+                  </p>
                 </div>
               </div>
             </div>
@@ -225,15 +280,24 @@ const VulnerableComponents = () => {
               <div className="vp-strategy-list">
                 <div className="vp-strategy">
                   <h4>Continuous Monitoring</h4>
-                  <p>Monitor vulnerability databases and security advisories for all used components.</p>
+                  <p>
+                    Monitor vulnerability databases and security advisories for
+                    all used components.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Patch Management</h4>
-                  <p>Establish processes for timely testing and deployment of security patches.</p>
+                  <p>
+                    Establish processes for timely testing and deployment of
+                    security patches.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Risk Assessment</h4>
-                  <p>Assess the risk of vulnerabilities based on exploitability and business impact.</p>
+                  <p>
+                    Assess the risk of vulnerabilities based on exploitability
+                    and business impact.
+                  </p>
                 </div>
               </div>
             </div>
@@ -242,15 +306,24 @@ const VulnerableComponents = () => {
               <div className="vp-strategy-list">
                 <div className="vp-strategy">
                   <h4>Vetted Sources</h4>
-                  <p>Only use components from trusted sources with good security track records.</p>
+                  <p>
+                    Only use components from trusted sources with good security
+                    track records.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Security Requirements</h4>
-                  <p>Include security requirements in component selection and procurement processes.</p>
+                  <p>
+                    Include security requirements in component selection and
+                    procurement processes.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Supply Chain Security</h4>
-                  <p>Verify component integrity and authenticity through digital signatures and hashes.</p>
+                  <p>
+                    Verify component integrity and authenticity through digital
+                    signatures and hashes.
+                  </p>
                 </div>
               </div>
             </div>
@@ -315,7 +388,19 @@ dependencies:
             </div>
           </div>
         </div>
-         <button type="button" class="btn btn-outline-warning">Try it Yourself</button>
+        <button
+          type="button"
+          className="btn btn-outline-warning"
+          onClick={() => setShowDemo(!showDemo)}
+        >
+          {showDemo ? "Hide Demo" : "Try it Yourself"}
+        </button>
+
+        {showDemo && (
+          <div style={{ marginTop: "20px" }}>
+            <VulnerableComponentsDemo />
+          </div>
+        )}
       </section>
 
       {/* Resources */}
@@ -323,22 +408,34 @@ dependencies:
         <div className="vp-container">
           <h2>Additional Resources</h2>
           <div className="vp-resources-grid">
-            <a href="https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/" className="vp-resource-card">
+            <a
+              href="https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/"
+              className="vp-resource-card"
+            >
               <div className="vp-resource-icon">📚</div>
               <h3>OWASP Dependency Management</h3>
               <p>Complete guide to managing vulnerable components</p>
             </a>
-            <a href="https://owasp.org/www-project-dependency-check/" className="vp-resource-card">
+            <a
+              href="https://owasp.org/www-project-dependency-check/"
+              className="vp-resource-card"
+            >
               <div className="vp-resource-icon">🛡️</div>
               <h3>OWASP Dependency Check</h3>
               <p>Open-source SCA tool for vulnerability detection</p>
             </a>
-            <a href="https://docs.github.com/en/code-security/supply-chain-security" className="vp-resource-card">
+            <a
+              href="https://docs.github.com/en/code-security/supply-chain-security"
+              className="vp-resource-card"
+            >
               <div className="vp-resource-icon">🔍</div>
               <h3>GitHub Supply Chain Security</h3>
               <p>Tools and practices for securing software supply chains</p>
             </a>
-            <a href="https://cwe.mitre.org/data/definitions/1104.html" className="vp-resource-card">
+            <a
+              href="https://cwe.mitre.org/data/definitions/1104.html"
+              className="vp-resource-card"
+            >
               <div className="vp-resource-icon">📋</div>
               <h3>CWE-1104: Unmaintained Components</h3>
               <p>Common Weakness Enumeration for unmaintained software</p>

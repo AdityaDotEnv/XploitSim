@@ -1,7 +1,11 @@
-import React from 'react';
-import './VulnerabilityPage.css';
+import { useState } from "react";
+import ServerSideRequestForgeryDemo from "./ServerSideRequestForgeryDemo";
+import React from "react";
+import "./VulnerabilityPage.css";
 
 const ServerSideRequestForgery = () => {
+  const [showDemo, setShowDemo] = useState(false);
+
   return (
     <div className="vulnerability-page">
       <section className="vp-hero">
@@ -10,8 +14,9 @@ const ServerSideRequestForgery = () => {
             <div className="vp-badge">A10:2021</div>
             <h1 className="vp-title">Server-Side Request Forgery</h1>
             <p className="vp-subtitle">
-              Web applications that fetch remote resources without validating user-supplied URLs, 
-              allowing attackers to make the application send crafted requests to unexpected destinations.
+              Web applications that fetch remote resources without validating
+              user-supplied URLs, allowing attackers to make the application
+              send crafted requests to unexpected destinations.
             </p>
             <div className="vp-stats">
               <div className="vp-stat">
@@ -43,21 +48,30 @@ const ServerSideRequestForgery = () => {
           <div className="vp-overview-grid">
             <div className="vp-overview-content">
               <p>
-                SSRF flaws occur when a web application fetches a remote resource without validating the user-supplied URL. 
-                Attackers can force the application to send crafted requests to unexpected destinations, even when protected by firewalls, 
-                VPNs, or network access control lists.
+                SSRF flaws occur when a web application fetches a remote
+                resource without validating the user-supplied URL. Attackers can
+                force the application to send crafted requests to unexpected
+                destinations, even when protected by firewalls, VPNs, or network
+                access control lists.
               </p>
               <p>
-                Modern web applications provide convenient features for end users, which can fetch and display data from remote URLs. 
-                As a result, the attacker can coerce the application to send a crafted request to an unexpected destination, 
-                even when protected by firewalls, VPNs, or another type of network access control list.
+                Modern web applications provide convenient features for end
+                users, which can fetch and display data from remote URLs. As a
+                result, the attacker can coerce the application to send a
+                crafted request to an unexpected destination, even when
+                protected by firewalls, VPNs, or another type of network access
+                control list.
               </p>
               <div className="vp-impact-box">
                 <h4>🚨 SSRF Attack Impacts</h4>
                 <ul>
-                  <li>Access to internal systems and cloud metadata services</li>
+                  <li>
+                    Access to internal systems and cloud metadata services
+                  </li>
                   <li>Port scanning of internal network infrastructure</li>
-                  <li>Remote code execution through internal service exploitation</li>
+                  <li>
+                    Remote code execution through internal service exploitation
+                  </li>
                   <li>Data exfiltration from internal systems</li>
                   <li>Bypass of network security controls and firewalls</li>
                 </ul>
@@ -106,7 +120,10 @@ const ServerSideRequestForgery = () => {
             <div className="vp-vector-card vp-critical">
               <div className="vp-vector-icon">🏠</div>
               <h3>Internal Network Access</h3>
-              <p>Accessing internal services and systems that are not exposed to the public internet.</p>
+              <p>
+                Accessing internal services and systems that are not exposed to
+                the public internet.
+              </p>
               <div className="vp-vector-example">
                 <code>http://192.168.1.1/admin</code>
               </div>
@@ -114,7 +131,10 @@ const ServerSideRequestForgery = () => {
             <div className="vp-vector-card vp-high">
               <div className="vp-vector-icon">☁️</div>
               <h3>Cloud Metadata Access</h3>
-              <p>Accessing cloud provider metadata services to obtain credentials and sensitive information.</p>
+              <p>
+                Accessing cloud provider metadata services to obtain credentials
+                and sensitive information.
+              </p>
               <div className="vp-vector-example">
                 <code>http://169.254.169.254/latest/meta-data/</code>
               </div>
@@ -122,7 +142,10 @@ const ServerSideRequestForgery = () => {
             <div className="vp-vector-card vp-high">
               <div className="vp-vector-icon">🔍</div>
               <h3>Port Scanning</h3>
-              <p>Scanning internal network ports to discover services and identify potential attack targets.</p>
+              <p>
+                Scanning internal network ports to discover services and
+                identify potential attack targets.
+              </p>
               <div className="vp-vector-example">
                 <code>http://internal-service:22</code>
               </div>
@@ -130,7 +153,10 @@ const ServerSideRequestForgery = () => {
             <div className="vp-vector-card vp-medium">
               <div className="vp-vector-icon">🔄</div>
               <h3>Protocol Smuggling</h3>
-              <p>Using different URL schemes and protocols to bypass filters and access restricted resources.</p>
+              <p>
+                Using different URL schemes and protocols to bypass filters and
+                access restricted resources.
+              </p>
               <div className="vp-vector-example">
                 <code>file:///etc/passwd</code>
               </div>
@@ -138,7 +164,10 @@ const ServerSideRequestForgery = () => {
             <div className="vp-vector-card vp-critical">
               <div className="vp-vector-icon">💻</div>
               <h3>Remote Code Execution</h3>
-              <p>Chaining SSRF with other vulnerabilities to achieve remote code execution on internal systems.</p>
+              <p>
+                Chaining SSRF with other vulnerabilities to achieve remote code
+                execution on internal systems.
+              </p>
               <div className="vp-vector-example">
                 <code>http://localhost:8080/actuator/gateway/routes</code>
               </div>
@@ -146,7 +175,10 @@ const ServerSideRequestForgery = () => {
             <div className="vp-vector-card vp-high">
               <div className="vp-vector-icon">📧</div>
               <h3>Service Interaction</h3>
-              <p>Interacting with internal services like databases, caches, or message queues through SSRF.</p>
+              <p>
+                Interacting with internal services like databases, caches, or
+                message queues through SSRF.
+              </p>
               <div className="vp-vector-example">
                 <code>http://redis:6379/</code>
               </div>
@@ -164,7 +196,11 @@ const ServerSideRequestForgery = () => {
               <div className="vp-timeline-year">2019</div>
               <div className="vp-timeline-content">
                 <h4>Capital One SSRF Breach</h4>
-                <p>SSRF vulnerability allowed attacker to access AWS metadata service and obtain temporary credentials, leading to exposure of 100 million customer records.</p>
+                <p>
+                  SSRF vulnerability allowed attacker to access AWS metadata
+                  service and obtain temporary credentials, leading to exposure
+                  of 100 million customer records.
+                </p>
                 <div className="vp-breach-impact">
                   <span className="vp-impact-badge">100M Records</span>
                   <span className="vp-impact-badge">AWS Compromise</span>
@@ -175,7 +211,11 @@ const ServerSideRequestForgery = () => {
               <div className="vp-timeline-year">2021</div>
               <div className="vp-timeline-content">
                 <h4>Microsoft Exchange SSRF</h4>
-                <p>SSRF vulnerability in Microsoft Exchange Server (CVE-2021-26855) allowed attackers to bypass authentication and achieve remote code execution.</p>
+                <p>
+                  SSRF vulnerability in Microsoft Exchange Server
+                  (CVE-2021-26855) allowed attackers to bypass authentication
+                  and achieve remote code execution.
+                </p>
                 <div className="vp-breach-impact">
                   <span className="vp-impact-badge">30K Organizations</span>
                   <span className="vp-impact-badge">RCE</span>
@@ -186,7 +226,11 @@ const ServerSideRequestForgery = () => {
               <div className="vp-timeline-year">2020</div>
               <div className="vp-timeline-content">
                 <h4>Shopify SSRF Incident</h4>
-                <p>SSRF vulnerability in Shopify's partner and collaborator system allowed access to internal services and sensitive merchant data.</p>
+                <p>
+                  SSRF vulnerability in Shopify's partner and collaborator
+                  system allowed access to internal services and sensitive
+                  merchant data.
+                </p>
                 <div className="vp-breach-impact">
                   <span className="vp-impact-badge">Internal Access</span>
                   <span className="vp-impact-badge">Merchant Data</span>
@@ -207,15 +251,24 @@ const ServerSideRequestForgery = () => {
               <div className="vp-strategy-list">
                 <div className="vp-strategy">
                   <h4>URL Allow Lists</h4>
-                  <p>Maintain allow lists of permitted domains and block all other URLs.</p>
+                  <p>
+                    Maintain allow lists of permitted domains and block all
+                    other URLs.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Scheme Restrictions</h4>
-                  <p>Only allow HTTP and HTTPS protocols, block file, gopher, ftp, and other schemes.</p>
+                  <p>
+                    Only allow HTTP and HTTPS protocols, block file, gopher,
+                    ftp, and other schemes.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>IP Address Validation</h4>
-                  <p>Block requests to internal IP addresses, localhost, and cloud metadata services.</p>
+                  <p>
+                    Block requests to internal IP addresses, localhost, and
+                    cloud metadata services.
+                  </p>
                 </div>
               </div>
             </div>
@@ -224,15 +277,24 @@ const ServerSideRequestForgery = () => {
               <div className="vp-strategy-list">
                 <div className="vp-strategy">
                   <h4>Egress Filtering</h4>
-                  <p>Implement network egress filtering to restrict outbound connections from application servers.</p>
+                  <p>
+                    Implement network egress filtering to restrict outbound
+                    connections from application servers.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Segmentation</h4>
-                  <p>Use network segmentation to isolate application servers from sensitive internal systems.</p>
+                  <p>
+                    Use network segmentation to isolate application servers from
+                    sensitive internal systems.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>DNS Rebinding Protection</h4>
-                  <p>Implement DNS resolution controls to prevent DNS rebinding attacks.</p>
+                  <p>
+                    Implement DNS resolution controls to prevent DNS rebinding
+                    attacks.
+                  </p>
                 </div>
               </div>
             </div>
@@ -241,15 +303,24 @@ const ServerSideRequestForgery = () => {
               <div className="vp-strategy-list">
                 <div className="vp-strategy">
                   <h4>Response Validation</h4>
-                  <p>Validate and sanitize responses from remote resources before processing them.</p>
+                  <p>
+                    Validate and sanitize responses from remote resources before
+                    processing them.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Content-Type Restrictions</h4>
-                  <p>Only process expected content types and reject unexpected response formats.</p>
+                  <p>
+                    Only process expected content types and reject unexpected
+                    response formats.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Timeout Configuration</h4>
-                  <p>Set reasonable timeouts for remote requests to prevent denial of service.</p>
+                  <p>
+                    Set reasonable timeouts for remote requests to prevent
+                    denial of service.
+                  </p>
                 </div>
               </div>
             </div>
@@ -335,7 +406,19 @@ app.use('/webhook', (req, res, next) => {
             </div>
           </div>
         </div>
-         <button type="button" class="btn btn-outline-warning">Try it Yourself</button>
+        <button
+          type="button"
+          className="btn btn-outline-warning"
+          onClick={() => setShowDemo(!showDemo)}
+        >
+          {showDemo ? "Hide Demo" : "Try it Yourself"}
+        </button>
+
+        {showDemo && (
+          <div style={{ marginTop: "20px" }}>
+            <ServerSideRequestForgeryDemo />
+          </div>
+        )}
       </section>
 
       {/* Resources */}
@@ -343,22 +426,34 @@ app.use('/webhook', (req, res, next) => {
         <div className="vp-container">
           <h2>Additional Resources</h2>
           <div className="vp-resources-grid">
-            <a href="https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/" className="vp-resource-card">
+            <a
+              href="https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/"
+              className="vp-resource-card"
+            >
               <div className="vp-resource-icon">📚</div>
               <h3>OWASP SSRF Prevention</h3>
               <p>Complete guide to preventing server-side request forgery</p>
             </a>
-            <a href="https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html" className="vp-resource-card">
+            <a
+              href="https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html"
+              className="vp-resource-card"
+            >
               <div className="vp-resource-icon">🛡️</div>
               <h3>SSRF Prevention Cheat Sheet</h3>
               <p>Comprehensive SSRF prevention practices</p>
             </a>
-            <a href="https://portswigger.net/web-security/ssrf" className="vp-resource-card">
+            <a
+              href="https://portswigger.net/web-security/ssrf"
+              className="vp-resource-card"
+            >
               <div className="vp-resource-icon">🔍</div>
               <h3>SSRF Labs & Testing</h3>
               <p>Interactive SSRF labs and testing methodologies</p>
             </a>
-            <a href="https://cwe.mitre.org/data/definitions/918.html" className="vp-resource-card">
+            <a
+              href="https://cwe.mitre.org/data/definitions/918.html"
+              className="vp-resource-card"
+            >
               <div className="vp-resource-icon">📋</div>
               <h3>CWE-918: SSRF</h3>
               <p>Common Weakness Enumeration for server-side request forgery</p>

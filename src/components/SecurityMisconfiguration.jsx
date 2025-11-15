@@ -5,6 +5,45 @@ import { useNavigate } from 'react-router-dom';
 const SecurityMisconfiguration = () => {
   const navigate = useNavigate();
 
+  // Code samples displayed as literal text — no runtime env lookups
+  const insecureConfig = `# UNSAFE: Default credentials
+spring.datasource.username=sa
+spring.datasource.password=
+
+# UNSAFE: Verbose errors
+server.error.include-stacktrace=always
+server.error.include-message=always
+
+# UNSAFE: Development settings in production
+spring.h2.console.enabled=true
+spring.jpa.show-sql=true
+
+# UNSAFE: Weak security headers / Directory listing
+server.servlet.session.cookie.http-only=false
+Options +Indexes
+`;
+
+  const secureConfig = `# SECURE: Strong credentials (use an environment variable on the server)
+spring.datasource.username=app_user
+spring.datasource.password=\${DB_PASSWORD}
+
+# SECURE: Generic errors
+server.error.include-stacktrace=never
+server.error.include-message=on_param
+
+# SECURE: Production hardening
+spring.h2.console.enabled=false
+spring.jpa.show-sql=false
+
+# SECURE: Security headers (set these at the server/proxy level)
+server.servlet.session.cookie.http-only=true
+server.servlet.session.cookie.secure=true
+security.headers.hsts=max-age=31536000
+
+# SECURE: Disable directory listing
+Options -Indexes
+`;
+
   return (
     <div className="vulnerability-page">
       <section className="vp-hero">
@@ -13,7 +52,7 @@ const SecurityMisconfiguration = () => {
             <div className="vp-badge">A05:2021</div>
             <h1 className="vp-title">Security Misconfiguration</h1>
             <p className="vp-subtitle">
-              Insecure configurations in any part of the application stack, from network services to platform settings. 
+              Insecure configurations in any part of the application stack, from network services to platform settings.
               The most commonly seen issue across applications and systems.
             </p>
 
@@ -238,28 +277,18 @@ const SecurityMisconfiguration = () => {
 
           <div className="vp-code-comparison">
 
-            <div className="vp-code-block vp-vulnerable">
+            <div className="vp-code-block vp-vulnerable" aria-live="polite">
               <h4>❌ Insecure Configuration</h4>
-              <pre>{`
-spring.datasource.username=sa
-spring.datasource.password=
-server.error.include-stacktrace=always
-server.h2.console.enabled=true
-Options +Indexes
-`}</pre>
+              <pre>{insecureConfig}</pre>
             </div>
 
-            <div className="vp-code-block vp-secure">
-              <h4>✅ Secure Configuration</h4>
-              <pre>{`
-spring.datasource.username=app_user
-spring.datasource.password=\${DB_PASSWORD}
-
-server.error.include-stacktrace=never
-server.h2.console.enabled=false
-
-Options -Indexes
-`}</pre>
+            <div className="vp-code-block vp-secure" aria-live="polite">
+              <h4>✅ Secure Configuration (server-side)</h4>
+              <pre>{secureConfig}</pre>
+              <p className="vp-note">
+                <strong>Note:</strong> Never embed secrets in client-side code. The placeholder <code>${'{'}DB_PASSWORD{'}'}</code> above
+                represents a server-side environment variable — set and read it on the server or during deployment.
+              </p>
             </div>
 
           </div>
@@ -281,22 +310,22 @@ Options -Indexes
           <h2>Additional Resources</h2>
 
           <div className="vp-resources-grid">
-            <a className="vp-resource-card" href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">
+            <a className="vp-resource-card" href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/" rel="noreferrer" target="_blank">
               <div className="vp-resource-icon">📚</div>
               <h3>OWASP Security Configuration Guide</h3>
             </a>
 
-            <a className="vp-resource-card" href="https://cheatsheetseries.owasp.org/cheatsheets/Security_Headers_Cheat_Sheet.html">
+            <a className="vp-resource-card" href="https://cheatsheetseries.owasp.org/cheatsheets/Security_Headers_Cheat_Sheet.html" rel="noreferrer" target="_blank">
               <div className="vp-resource-icon">🛡️</div>
               <h3>Security Headers Cheat Sheet</h3>
             </a>
 
-            <a className="vp-resource-card" href="https://www.cisecurity.org/cis-benchmarks/">
+            <a className="vp-resource-card" href="https://www.cisecurity.org/cis-benchmarks/" rel="noreferrer" target="_blank">
               <div className="vp-resource-icon">🔍</div>
               <h3>CIS Benchmarks</h3>
             </a>
 
-            <a className="vp-resource-card" href="https://cwe.mitre.org/data/definitions/16.html">
+            <a className="vp-resource-card" href="https://cwe.mitre.org/data/definitions/16.html" rel="noreferrer" target="_blank">
               <div className="vp-resource-icon">📋</div>
               <h3>CWE-16: Configuration</h3>
             </a>
