@@ -24,14 +24,15 @@ This platform helps students, developers, and cybersecurity learners **see attac
 
 Each vulnerability is implemented as an **independent backend microservice** and a **frontend demonstration component**.
 
-| OWASP ID | Vulnerability Name                      | Port  | Status |
-|---------|------------------------------------------|-------|--------|
-| **A01** | Broken Access Control                     | 4000  | ✅ Active |
-| **A02** | Cryptographic Failures                    | 5001  | ✅ Active |
-| **A03** | Injection                                  | 5100  | ✅ Active |
-| **A04** | Insecure Design                            | 5200  | ✅ Active |
-| **A05** | Security Misconfiguration                  | 5300  | ✅ Active |
-| **A06** | Vulnerable & Outdated Components          | 5051  | 🆕 NEW |
+| OWASP ID | Vulnerability Name                        | Port  | Status      |
+|----------|--------------------------------------------|-------|-------------|
+| **A01**  | Broken Access Control                      | 4000  | ✅ Active   |
+| **A02**  | Cryptographic Failures                     | 5001  | ✅ Active   |
+| **A03**  | Injection                                   | 5100  | ✅ Active   |
+| **A04**  | Insecure Design                             | 5200  | ✅ Active   |
+| **A05**  | Security Misconfiguration                   | 5300  | ✅ Active   |
+| **A06**  | Vulnerable & Outdated Components           | 5050  | ✅ Active      |
+| **A08**  | Software & Data Integrity Failures         | 5400  | ✅ Active    |
 
 ---
 
@@ -41,35 +42,41 @@ Each vulnerability is implemented as an **independent backend microservice** and
 - Missing authorization checks  
 - Privilege escalation  
 - Insecure direct object references  
-- SQLite backend included  
+- SQLite sandbox  
 
 ### 🔐 **A02 – Cryptographic Failures**
-- Weak hashing  
-- Poor secrets handling  
+- Weak hashing & key handling  
 - Sensitive data exposure  
 - SQLite crypto demo  
 
 ### 💉 **A03 – Injection**
-- SQL Injection demonstration  
-- Editable sandbox with SQLite seeding  
-- Query tampering demo  
+- SQL Injection sandbox  
+- Dynamic query tampering  
+- SQLite DB seeding  
 
 ### 🏗 **A04 – Insecure Design**
-- Flawed architectural decisions  
+- Flawed architecture  
 - Missing validation layers  
 - Unsafe trust boundaries  
 
 ### ⚙ **A05 – Security Misconfiguration**
-- Missing headers  
-- Overly verbose errors  
+- Misconfigured headers  
 - Unrestricted CORS  
+- Verbose errors  
 - Hard-coded secrets  
 
-### 📦 **A06 – Vulnerable & Outdated Components** (NEW)
-- Backend intentionally uses outdated npm packages  
-- Demonstrates exploitability of unpatched libraries  
-- Frontend includes “Try it Yourself” fetch demo  
-- Runs on **127.0.0.1:5050**  
+### 📦 **A06 – Vulnerable & Outdated Components**
+- Uses intentionally outdated dependencies  
+- Demonstrates supply-chain risks  
+- Simple fetch demo  
+- Runs on **127.0.0.1:5050**
+
+### 🧩 **A08 – Software & Data Integrity Failures**
+- Demonstrates unsigned/tampered update packages  
+- Shows lack of integrity verification  
+- Includes safe vs unsafe update comparison  
+- Runs on **127.0.0.1:5400**  
+- “Try it Yourself” toggle loads the interactive demo  
 
 ---
 
@@ -100,7 +107,8 @@ npm install --prefix cryptographic-failures
 npm install --prefix injection  
 npm install --prefix insecure-design  
 npm install --prefix security-misconfiguration  
-npm install --prefix vulnerable-components   # NEW
+npm install --prefix vulnerable-components  
+npm install --prefix software-data-integrity     # NEW
 
 ---
 
@@ -110,7 +118,7 @@ npm install sqlite3
 npm install sqlite  
 npm run seed --prefix injection
 
-Expected output:
+Expected output:  
 “Seeded injection.sqlite with users table.”
 
 ---
@@ -122,12 +130,13 @@ npm start
 
 This launches:
 
-- Broken Access Control → http://localhost:4000  
-- Cryptographic Failures → http://localhost:5001  
-- Injection → http://localhost:5100  
-- Insecure Design → http://localhost:5200  
-- Security Misconfiguration → http://localhost:5300  
-- Vulnerable Components → http://127.0.0.1:5050  
+- A01 → http://localhost:4000  
+- A02 → http://localhost:5001  
+- A03 → http://localhost:5100  
+- A04 → http://localhost:5200  
+- A05 → http://localhost:5300  
+- A06 → http://127.0.0.1:5050  
+- A08 → http://127.0.0.1:5400  
 
 ---
 
@@ -137,8 +146,7 @@ cd frontend
 npm install   # first time only  
 npm run dev
 
-Visit the app:
-
+Open the app:  
 http://localhost:5137
 
 ---
@@ -147,21 +155,21 @@ http://localhost:5137
 
 npm run build
 
-Outputs optimized build to:
+Optimized build located in:
 
 ./build
 
-Deployable on Netlify, Vercel, or any static hosting.
+Ready for deployment to Netlify, Vercel, or static hosting.
 
 ---
 
 # 🚀 Full Workflow Summary
 
-## Terminal 1 (Backend)
+## Terminal 1: Backend
 cd server  
 npm start
 
-## Terminal 2 (Frontend)
+## Terminal 2: Frontend
 cd frontend  
 npm run dev
 
@@ -183,14 +191,16 @@ npm run dev
 
 # 🧠 Vision
 
-XploitSim aims to bridge the gap between **cybersecurity theory and practical hands-on learning**.
+XploitSim aims to bridge the gap between **cybersecurity theory and hands-on practical learning**.
 
-Instead of reading static definitions, learners can:
+Instead of static definitions, users can:
 
-- Explore real insecure code  
-- Perform attacks safely  
-- Study mitigation strategies  
-- Understand real OWASP Top 10 risks  
+- Watch insecure systems behave in real-time  
+- Simulate cyber attacks safely  
+- Interact with insecure code  
+- Study mitigation techniques  
+- Understand each OWASP risk deeply  
 
 **Goal:**  
-> Make every OWASP vulnerability accessible, interactive, and safe for learners worldwide.
+> Make every OWASP Top 10 vulnerability accessible, interactive, and safe for learners worldwide.
+

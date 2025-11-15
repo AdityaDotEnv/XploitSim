@@ -1,7 +1,11 @@
-import React from 'react';
-import './VulnerabilityPage.css';
+import { useState } from "react";
+import SoftwareIntegrityDemo from "./SoftwareIntegrityDemo";
+import React from "react";
+import "./VulnerabilityPage.css";
 
 const SoftwareDataIntegrity = () => {
+  const [showDemo, setShowDemo] = useState(false);
+
   return (
     <div className="vulnerability-page">
       <section className="vp-hero">
@@ -10,8 +14,9 @@ const SoftwareDataIntegrity = () => {
             <div className="vp-badge">A08:2021</div>
             <h1 className="vp-title">Software and Data Integrity Failures</h1>
             <p className="vp-subtitle">
-              Failures related to code and infrastructure that does not protect against integrity violations, 
-              including insecure CI/CD pipelines, unauthorized software updates, and data serialization issues.
+              Failures related to code and infrastructure that does not protect
+              against integrity violations, including insecure CI/CD pipelines,
+              unauthorized software updates, and data serialization issues.
             </p>
             <div className="vp-stats">
               <div className="vp-stat">
@@ -43,23 +48,38 @@ const SoftwareDataIntegrity = () => {
           <div className="vp-overview-grid">
             <div className="vp-overview-content">
               <p>
-                Software and data integrity failures relate to code and infrastructure that does not protect 
-                against integrity violations. This can occur when software and data are not verified for integrity, 
-                leading to potential supply chain compromises, unauthorized software updates, or malicious code execution.
+                Software and data integrity failures relate to code and
+                infrastructure that does not protect against integrity
+                violations. This can occur when software and data are not
+                verified for integrity, leading to potential supply chain
+                compromises, unauthorized software updates, or malicious code
+                execution.
               </p>
               <p>
-                This category focuses on assumptions related to software updates, critical data, and CI/CD pipelines 
-                without verifying integrity. One of the highest weighted impacts from Common Vulnerability and Exposures/Common 
-                Vulnerability Scoring System (CVE/CVSS) data mapped to the 10 CWEs in this category.
+                This category focuses on assumptions related to software
+                updates, critical data, and CI/CD pipelines without verifying
+                integrity. One of the highest weighted impacts from Common
+                Vulnerability and Exposures/Common Vulnerability Scoring System
+                (CVE/CVSS) data mapped to the 10 CWEs in this category.
               </p>
               <div className="vp-impact-box">
                 <h4>🚨 Integrity Failure Impacts</h4>
                 <ul>
-                  <li>Supply chain attacks compromising entire software ecosystems</li>
+                  <li>
+                    Supply chain attacks compromising entire software ecosystems
+                  </li>
                   <li>Unauthorized code execution through malicious updates</li>
-                  <li>Data corruption or manipulation affecting business operations</li>
-                  <li>Remote code execution through deserialization vulnerabilities</li>
-                  <li>Complete system compromise through compromised dependencies</li>
+                  <li>
+                    Data corruption or manipulation affecting business
+                    operations
+                  </li>
+                  <li>
+                    Remote code execution through deserialization
+                    vulnerabilities
+                  </li>
+                  <li>
+                    Complete system compromise through compromised dependencies
+                  </li>
                 </ul>
               </div>
             </div>
@@ -90,7 +110,9 @@ const SoftwareDataIntegrity = () => {
                   <div className="vp-step-number">4</div>
                   <div className="vp-step-content">
                     <strong>System Compromise</strong>
-                    <span>Compromised code executes with system privileges</span>
+                    <span>
+                      Compromised code executes with system privileges
+                    </span>
                   </div>
                 </div>
               </div>
@@ -106,15 +128,23 @@ const SoftwareDataIntegrity = () => {
             <div className="vp-vector-card vp-critical">
               <div className="vp-vector-icon">⚡</div>
               <h3>Insecure CI/CD Pipelines</h3>
-              <p>Build pipelines without proper access controls, allowing unauthorized code changes or malicious deployments.</p>
+              <p>
+                Build pipelines without proper access controls, allowing
+                unauthorized code changes or malicious deployments.
+              </p>
               <div className="vp-vector-example">
-                <code>Publicly accessible Jenkins servers with weak authentication</code>
+                <code>
+                  Publicly accessible Jenkins servers with weak authentication
+                </code>
               </div>
             </div>
             <div className="vp-vector-card vp-high">
               <div className="vp-vector-icon">📦</div>
               <h3>Unverified Software Updates</h3>
-              <p>Applications that download and install updates without verifying their authenticity or integrity.</p>
+              <p>
+                Applications that download and install updates without verifying
+                their authenticity or integrity.
+              </p>
               <div className="vp-vector-example">
                 <code>HTTP-based updates without digital signatures</code>
               </div>
@@ -122,7 +152,10 @@ const SoftwareDataIntegrity = () => {
             <div className="vp-vector-card vp-high">
               <div className="vp-vector-icon">🔗</div>
               <h3>Insecure Deserialization</h3>
-              <p>Deserializing untrusted data without proper validation, leading to remote code execution.</p>
+              <p>
+                Deserializing untrusted data without proper validation, leading
+                to remote code execution.
+              </p>
               <div className="vp-vector-example">
                 <code>Java ObjectInputStream with user-controlled data</code>
               </div>
@@ -130,7 +163,10 @@ const SoftwareDataIntegrity = () => {
             <div className="vp-vector-card vp-medium">
               <div className="vp-vector-icon">🌐</div>
               <h3>Plugin Architecture Risks</h3>
-              <p>Systems that load plugins or modules without verifying their integrity or authenticity.</p>
+              <p>
+                Systems that load plugins or modules without verifying their
+                integrity or authenticity.
+              </p>
               <div className="vp-vector-example">
                 <code>WordPress plugins from untrusted sources</code>
               </div>
@@ -138,7 +174,10 @@ const SoftwareDataIntegrity = () => {
             <div className="vp-vector-card vp-critical">
               <div className="vp-vector-icon">🔄</div>
               <h3>Supply Chain Compromises</h3>
-              <p>Dependencies or third-party components that have been maliciously modified before distribution.</p>
+              <p>
+                Dependencies or third-party components that have been
+                maliciously modified before distribution.
+              </p>
               <div className="vp-vector-example">
                 <code>SolarWinds Orion software compromise</code>
               </div>
@@ -146,9 +185,14 @@ const SoftwareDataIntegrity = () => {
             <div className="vp-vector-card vp-high">
               <div className="vp-vector-icon">📝</div>
               <h3>Data Integrity Issues</h3>
-              <p>Applications that don't verify the integrity of critical data, allowing tampering or corruption.</p>
+              <p>
+                Applications that don't verify the integrity of critical data,
+                allowing tampering or corruption.
+              </p>
               <div className="vp-vector-example">
-                <code>Financial data without checksums or digital signatures</code>
+                <code>
+                  Financial data without checksums or digital signatures
+                </code>
               </div>
             </div>
           </div>
@@ -164,7 +208,11 @@ const SoftwareDataIntegrity = () => {
               <div className="vp-timeline-year">2020</div>
               <div className="vp-timeline-content">
                 <h4>SolarWinds Supply Chain Attack</h4>
-                <p>Attackers compromised SolarWinds' build system to distribute malicious updates to 18,000 organizations, including US government agencies and Fortune 500 companies.</p>
+                <p>
+                  Attackers compromised SolarWinds' build system to distribute
+                  malicious updates to 18,000 organizations, including US
+                  government agencies and Fortune 500 companies.
+                </p>
                 <div className="vp-breach-impact">
                   <span className="vp-impact-badge">18K Organizations</span>
                   <span className="vp-impact-badge">Nation State</span>
@@ -175,7 +223,11 @@ const SoftwareDataIntegrity = () => {
               <div className="vp-timeline-year">2019</div>
               <div className="vp-timeline-content">
                 <h4>Capital One Build System Compromise</h4>
-                <p>Misconfigured web application firewall in CI/CD pipeline allowed attacker to execute commands and access 100 million customer records.</p>
+                <p>
+                  Misconfigured web application firewall in CI/CD pipeline
+                  allowed attacker to execute commands and access 100 million
+                  customer records.
+                </p>
                 <div className="vp-breach-impact">
                   <span className="vp-impact-badge">100M Records</span>
                   <span className="vp-impact-badge">$190M Fine</span>
@@ -186,7 +238,11 @@ const SoftwareDataIntegrity = () => {
               <div className="vp-timeline-year">2017</div>
               <div className="vp-timeline-content">
                 <h4>NotPetya Malware Attack</h4>
-                <p>Compromised software update for Ukrainian accounting software MeDoc spread globally, causing $10 billion in damages to companies worldwide.</p>
+                <p>
+                  Compromised software update for Ukrainian accounting software
+                  MeDoc spread globally, causing $10 billion in damages to
+                  companies worldwide.
+                </p>
                 <div className="vp-breach-impact">
                   <span className="vp-impact-badge">$10B Damage</span>
                   <span className="vp-impact-badge">Global Impact</span>
@@ -207,15 +263,24 @@ const SoftwareDataIntegrity = () => {
               <div className="vp-strategy-list">
                 <div className="vp-strategy">
                   <h4>Digital Signatures</h4>
-                  <p>Use code signing and verify digital signatures for all software updates and deployments.</p>
+                  <p>
+                    Use code signing and verify digital signatures for all
+                    software updates and deployments.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Secure CI/CD</h4>
-                  <p>Implement strict access controls, audit trails, and integrity checks in build pipelines.</p>
+                  <p>
+                    Implement strict access controls, audit trails, and
+                    integrity checks in build pipelines.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Software Bill of Materials</h4>
-                  <p>Maintain SBOM to track all components and verify their integrity.</p>
+                  <p>
+                    Maintain SBOM to track all components and verify their
+                    integrity.
+                  </p>
                 </div>
               </div>
             </div>
@@ -224,15 +289,24 @@ const SoftwareDataIntegrity = () => {
               <div className="vp-strategy-list">
                 <div className="vp-strategy">
                   <h4>Dependency Verification</h4>
-                  <p>Verify checksums and digital signatures for all third-party dependencies.</p>
+                  <p>
+                    Verify checksums and digital signatures for all third-party
+                    dependencies.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Vetted Sources</h4>
-                  <p>Only use dependencies from trusted sources with good security practices.</p>
+                  <p>
+                    Only use dependencies from trusted sources with good
+                    security practices.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Isolated Build Environments</h4>
-                  <p>Use isolated, secure build environments to prevent contamination.</p>
+                  <p>
+                    Use isolated, secure build environments to prevent
+                    contamination.
+                  </p>
                 </div>
               </div>
             </div>
@@ -241,15 +315,24 @@ const SoftwareDataIntegrity = () => {
               <div className="vp-strategy-list">
                 <div className="vp-strategy">
                   <h4>Secure Deserialization</h4>
-                  <p>Use safe deserialization libraries and validate all serialized data.</p>
+                  <p>
+                    Use safe deserialization libraries and validate all
+                    serialized data.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Data Verification</h4>
-                  <p>Implement checksums, hashes, or digital signatures for critical data.</p>
+                  <p>
+                    Implement checksums, hashes, or digital signatures for
+                    critical data.
+                  </p>
                 </div>
                 <div className="vp-strategy">
                   <h4>Immutable Infrastructure</h4>
-                  <p>Use immutable infrastructure patterns to prevent runtime modifications.</p>
+                  <p>
+                    Use immutable infrastructure patterns to prevent runtime
+                    modifications.
+                  </p>
                 </div>
               </div>
             </div>
@@ -332,7 +415,19 @@ pipeline {
             </div>
           </div>
         </div>
-         <button type="button" class="btn btn-outline-warning">Try it Yourself</button>
+        <button
+          type="button"
+          className="btn btn-outline-warning"
+          onClick={() => setShowDemo(!showDemo)}
+        >
+          {showDemo ? "Hide Demo" : "Try it Yourself"}
+        </button>
+
+        {showDemo && (
+          <div style={{ marginTop: "20px" }}>
+            <SoftwareIntegrityDemo />
+          </div>
+        )}
       </section>
 
       {/* Resources */}
@@ -340,12 +435,18 @@ pipeline {
         <div className="vp-container">
           <h2>Additional Resources</h2>
           <div className="vp-resources-grid">
-            <a href="https://owasp.org/Top10/A08_2021-Software_and_Data_Integrity_Failures/" className="vp-resource-card">
+            <a
+              href="https://owasp.org/Top10/A08_2021-Software_and_Data_Integrity_Failures/"
+              className="vp-resource-card"
+            >
               <div className="vp-resource-icon">📚</div>
               <h3>OWASP Integrity Guide</h3>
               <p>Complete guide to software and data integrity protection</p>
             </a>
-            <a href="https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html" className="vp-resource-card">
+            <a
+              href="https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html"
+              className="vp-resource-card"
+            >
               <div className="vp-resource-icon">🛡️</div>
               <h3>Deserialization Security</h3>
               <p>Secure deserialization practices and prevention</p>
@@ -353,9 +454,14 @@ pipeline {
             <a href="https://slsa.dev/" className="vp-resource-card">
               <div className="vp-resource-icon">🔍</div>
               <h3>SLSA Framework</h3>
-              <p>Supply chain Levels for Software Artifacts security framework</p>
+              <p>
+                Supply chain Levels for Software Artifacts security framework
+              </p>
             </a>
-            <a href="https://cwe.mitre.org/data/definitions/502.html" className="vp-resource-card">
+            <a
+              href="https://cwe.mitre.org/data/definitions/502.html"
+              className="vp-resource-card"
+            >
               <div className="vp-resource-icon">📋</div>
               <h3>CWE-502: Deserialization</h3>
               <p>Common Weakness Enumeration for deserialization issues</p>
