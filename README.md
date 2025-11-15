@@ -20,7 +20,7 @@ This platform helps students, developers, and cybersecurity learners **see attac
 
 ---
 
-# 🔥 Supported Vulnerabilities (Current Modules)
+# 🔥 Supported Vulnerabilities
 
 Each vulnerability is implemented as an **independent backend microservice** and a **frontend demonstration component**.
 
@@ -159,8 +159,8 @@ Install each module:
 npm install --prefix broken-access-control  
 npm install --prefix cryptographic-failures  
 npm install --prefix injection  
-npm install --prefix insecure-design  
-npm install --prefix security-misconfiguration  
+npm install --prefix insecure-design
+npm install --prefix security-misconfiguration 
 npm install --prefix vulnerable-components
 npm install --prefix software-data-integrity
 npm install --prefix security-logging-failures
