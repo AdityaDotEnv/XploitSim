@@ -34,6 +34,7 @@ Each vulnerability is implemented as an **independent backend microservice** and
 | **A06**  | Vulnerable & Outdated Components           | 5050  | ✅ Active   |
 | **A07**  | Authentication Failures                    | N/A   | ✅ Active   |
 | **A08**  | Software & Data Integrity Failures         | 5400  | ✅ Active   |
+| **A09**  | Security Logging & Monitoring Failures     | 5600  | ✅ Active   |
 | **A10**  | Server-Side Request Forgery (SSRF)         | 5500  | ✅ Active   |
 
 ---
@@ -96,7 +97,28 @@ Each vulnerability is implemented as an **independent backend microservice** and
 - Runs on **127.0.0.1:5400**  
 - “Try it Yourself” toggle loads the interactive demo  
 
-### 🔄 **A10 – Server-Side Request Forgery (SSRF)**  *(NEW)*
+### 📝 **A09 – Security Logging & Monitoring Failures**
+
+- Demonstrates OWASP A09:2021 – Security Logging & Monitoring Failures**, how insufficient or incorrect logging enables attackers to operate undetected.
+- No logging of critical security events  
+- Logging sensitive data such as passwords  
+- Logs with no contextual information (missing timestamp, user-agent, IP)  
+- Log tampering and deletion  
+- Viewing raw, unstructured logs vs structured logs
+- **Login (No Logging)** → server authenticates but logs nothing  
+- **Weak Logging** → logs passwords and sensitive data  
+- **Log With No Context** → logs minimal, useless information  
+- **Delete Logs (Tampering)** → simulates an attacker wiping audit trails  
+- **View Log File** → displays current insecure log output  
+
+A custom log viewer (left panel) shows:
+- Realistic multiline logs  
+- Tampering effects  
+- Unstructured entries  
+- Sensitive data leakage  
+
+
+### 🔄 **A10 – Server-Side Request Forgery (SSRF)**
 - Allows user-supplied URLs to be fetched by the backend  
 - Demonstrates how attackers:
   - Access internal network services  
@@ -140,7 +162,8 @@ npm install --prefix injection
 npm install --prefix insecure-design  
 npm install --prefix security-misconfiguration  
 npm install --prefix vulnerable-components
-npm install --prefix software-data-integrity  
+npm install --prefix software-data-integrity
+npm install --prefix security-logging-failures
 npm install --prefix server-side-request-forgery
 
 ---
@@ -170,6 +193,7 @@ This launches:
 - A05 → http://localhost:5300  
 - A06 → http://127.0.0.1:5050  
 - A08 → http://127.0.0.1:5400  
+- A00 → http://127.0.0.1:5600
 - A10 → http://127.0.0.1:5500
 
 ---
@@ -203,8 +227,7 @@ Deployable to Netlify, Vercel, or static hosting.
 cd server  
 npm start
 
-## Terminal 2: Frontend
-cd frontend  
+## Terminal 2: Frontend 
 npm run dev
 
 ---
