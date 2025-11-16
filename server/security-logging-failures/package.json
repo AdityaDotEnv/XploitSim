@@ -5,8 +5,9 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "4.16.0",
+    "body-parser": "1.18.3",
     "cors": "^2.8.1",
-    "body-parser": "1.18.3"
+    "express": "4.16.0",
+    "xploitsim-server": "file:.."
   }
 }

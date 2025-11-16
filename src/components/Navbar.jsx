@@ -199,7 +199,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Overlay for mobile - RENDERED AFTER sidebar so it's underneath */}
+      {/* Overlay for mobile */}
       <div 
         className={`sidebar-overlay ${isSidebarOpen ? 'open' : ''}`}
         onClick={closeSidebar}
@@ -213,8 +213,12 @@ export default function Navbar() {
             {isSidebarOpen ? '✕' : '☰'}
           </button>
           
-          {/* Logo */}
-          <div className='logo'>
+          {/* Logo (Click to Home) */}
+          <div 
+            className='logo'
+            onClick={() => navigate('/')}
+            style={{ cursor: "pointer" }}
+          >
             <img src="/logo32.png" alt="Logo" />
           </div>
         </div>
