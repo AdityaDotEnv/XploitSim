@@ -425,91 +425,203 @@
 .contact-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch; /* Changed from center for better height alignment */
   gap: 50px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px;
-  background: #f9f9f9;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  padding: 60px 40px; /* Increased vertical padding */
+  background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%); /* Gradient background */
+  border-radius: 20px; /* Slightly larger radius */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08); /* Softer shadow */
   font-family: "Segoe UI", Arial, sans-serif;
+  min-height: 600px; /* Ensure minimum height */
 }
 
 .cform {
   flex: 1;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center form content */
 }
 
 .cform h1 {
-  font-size: 32px;
+  font-size: 36px; /* Slightly larger */
   font-weight: 700;
   margin-bottom: 15px;
   color: #1a1a1a;
+  background: linear-gradient(135deg, #0077ff, #00aaff); /* Gradient text */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .cform p {
   font-size: 18px;
-  margin-bottom: 25px;
-  color: #444;
+  margin-bottom: 30px; /* Increased spacing */
+  color: #666; /* Softer color */
+  line-height: 1.6;
 }
 
 .cform form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px; /* Increased gap between form elements */
+}
+
+.cform label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 600;
+  color: #333;
+  font-size: 15px;
 }
 
 .cform input,
 .cform textarea {
-  padding: 14px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+  padding: 16px; /* Slightly more padding */
+  border: 2px solid #e1e5e9; /* Thicker border */
+  border-radius: 12px; /* More rounded */
   font-size: 16px;
   outline: none;
   transition: all 0.3s ease;
+  background: #ffffff;
+  font-family: inherit;
 }
 
 .cform input:focus,
 .cform textarea:focus {
   border-color: #0077ff;
-  box-shadow: 0 0 8px rgba(0, 119, 255, 0.2);
+  box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.1); /* More subtle focus shadow */
+  transform: translateY(-1px); /* Lift effect on focus */
+}
+
+.cform textarea {
+  resize: vertical;
+  min-height: 120px;
 }
 
 .cform button {
-  padding: 14px;
-  font-size: 16px;
+  padding: 16px 24px;
+  font-size: 17px;
   background: linear-gradient(135deg, #0077ff, #005fcc);
   color: white;
   font-weight: 600;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s ease;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
 }
 
 .cform button:hover {
-  background: linear-gradient(135deg, #005fcc, #003f99);
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, #005fcc, #0047a3);
+  transform: translateY(-3px); /* More lift on hover */
+  box-shadow: 0 8px 20px rgba(0, 119, 255, 0.3); /* Enhanced shadow on hover */
 }
 
-/* Right Image */
+.cform button:active {
+  transform: translateY(-1px);
+}
+
+.cform button:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Success message styling */
+.success-message {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 15px;
+  animation: slideIn 0.5s ease-out;
+}
+
+/* Loading animation */
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.cform button:disabled {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Right Image - Improved */
 .cimage {
   flex: 1;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
 .cimage img {
-  max-width: 600px;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease;
+  width: 100%;
+  max-width: 550px; /* Slightly smaller for better balance */
+  height: 500px; /* Fixed height for consistency */
+  object-fit: cover; /* Ensure image covers area properly */
+  border-radius: 16px; /* Slightly larger radius */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12); /* Enhanced shadow */
+  transition: all 0.4s ease;
 }
 
 .cimage img:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18); /* Enhanced hover shadow */
+}
+
+/* Responsive design */
+@media (max-width: 968px) {
+  .contact-container {
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px 30px;
+  }
+  
+  .cimage img {
+    height: 300px;
+    max-width: 100%;
+  }
+  
+  .cform h1 {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-container {
+    padding: 30px 20px;
+    gap: 30px;
+  }
+  
+  .cform h1 {
+    font-size: 28px;
+  }
+  
+  .cform p {
+    font-size: 16px;
+  }
 }
 
 /* ===== FOOTER - NO GAP ===== */
