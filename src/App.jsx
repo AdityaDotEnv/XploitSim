@@ -1,138 +1,76 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
-import Navbar from './components/Navbar';
-import Understand from './components/Understand';
-import Securesection from './components/Securesection';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
+import MainLayout from './layouts/MainLayout';
+import HomePage from './pages/HomePage';
+import NotFoundPage from './pages/NotFoundPage';
 
-import OWASPTop10 from './components/OWASPTop10';
-import BrokenAccessControl from './components/BrokenAccessControl';
-import BrokenAccessControlSandbox from './components/BrokenAccessControlSandbox';
-import CryptographicFailures from './components/CryptographicFailures';
-import CryptographicFailuresSandbox from "./components/CryptographicFailuresSandbox";
+// Feature Components
+import AuthenticationFailures from './features/auth/components/AuthenticationFailures';
+import AuthenticationSandbox from './features/auth/components/AuthenticationSandbox';
 
-import Injection from './components/Injection';
-import InjectionSandbox from './components/InjectionSandbox';
+import BrokenAccessControl from './features/broken-access-control/components/BrokenAccessControl';
+import BrokenAccessControlSandbox from './features/broken-access-control/components/BrokenAccessControlSandbox';
 
-import InsecureDesign from './components/InsecureDesign';
-import InsecureDesignSandbox from './components/InsecureDesignSandbox';
+import CryptographicFailures from './features/crypto/components/CryptographicFailures';
+import CryptographicFailuresSandbox from './features/crypto/components/CryptographicFailuresSandbox';
 
-import SecurityMisconfiguration from './components/SecurityMisconfiguration';
-import SecurityMisconfigurationSandbox from './components/SecurityMisconfigurationSandbox';
+import Injection from './features/injection/components/Injection';
+import InjectionSandbox from './features/injection/components/InjectionSandbox';
 
-import VulnerableComponents from './components/VulnerableComponents';
-import AuthenticationFailures from './components/AuthenticationFailures';
-import AuthenticationSandbox from './components/AuthenticationSandbox';
+import InsecureDesign from './features/insecure-design/components/InsecureDesign';
+import InsecureDesignSandbox from './features/insecure-design/components/InsecureDesignSandbox';
 
-import SoftwareDataIntegrity from './components/SoftwareDataIntegrity';
-import SecurityLoggingFailures from './components/SecurityLoggingFailures';
-import ServerSideRequestForgery from './components/ServerSideRequestForgery';
+import SecurityMisconfiguration from './features/misconfiguration/components/SecurityMisconfiguration';
+import SecurityMisconfigurationSandbox from './features/misconfiguration/components/SecurityMisconfigurationSandbox';
 
+import VulnerableComponents from './features/vulnerable-components/components/VulnerableComponents';
 
-/* ---------------------- Scroll to Top Handler ---------------------- */
-function ScrollToTop() {
-  const { pathname } = useLocation();
+import SoftwareDataIntegrity from './features/software-integrity/components/SoftwareDataIntegrity';
+import SecurityLoggingFailures from './features/logging/components/SecurityLoggingFailures';
+import ServerSideRequestForgery from './features/ssrf/components/ServerSideRequestForgery';
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  return null;
-}
-
-/* --------------------------- Home Page ---------------------------- */
-function HomePage() {
-  return (
-    <>
-      <div className="hero-container">
-        <img src="herophoto.jpg" alt="Hero" />
-        <div className="hero-text">
-          <h1>Discover the OWASP Top 10 Vulnerabilities</h1>
-          <h4>
-            Welcome to our platform, where we illuminate the critical OWASP Top 10
-            security vulnerabilities that every developer should know.
-          </h4>
-        </div>
-      </div>
-
-      <div id="owasp">
-        <OWASPTop10 />
-      </div>
-
-      <div id="secure">
-        <Securesection />
-      </div>
-
-      <div id="understand">
-        <Understand />
-      </div>
-
-      <div id="contact">
-        <Contact />
-      </div>
-    </>
-  );
-}
-
-/* ----------------------------- Main App ---------------------------- */
 function App() {
   return (
     <Router>
       <ScrollToTop />
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<HomePage />} />
 
-      <div className="App">
-        <Navbar />
-        <main className="main-content">
-          <Routes>
+          {/* Vulnerability Pages */}
+          <Route path="/broken-access-control" element={<BrokenAccessControl />} />
+          <Route path="/broken-access-control/demo" element={<BrokenAccessControlSandbox key={Date.now()} />} />
+          <Route path="/broken-access-control/sandbox" element={<BrokenAccessControlSandbox key={Date.now()} />} />
 
-            {/* Home */}
-            <Route path="/" element={<HomePage />} />
+          <Route path="/cryptographic-failures" element={<CryptographicFailures />} />
+          <Route path="/cryptographic-failures/demo" element={<CryptographicFailuresSandbox />} />
 
-            {/* Vulnerability Pages */}
-            <Route path="/broken-access-control" element={<BrokenAccessControl />} />
-            <Route path="/broken-access-control/demo" element={<BrokenAccessControlSandbox key={Date.now()} />} />
-            <Route path="/broken-access-control/sandbox" element={<BrokenAccessControlSandbox key={Date.now()} />} />
+          <Route path="/injection" element={<Injection />} />
+          <Route path="/injection-sandbox" element={<InjectionSandbox />} />
 
-            <Route path="/cryptographic-failures" element={<CryptographicFailures />} />
-            <Route path="/cryptographic-failures/demo" element={<CryptographicFailuresSandbox />} />
+          <Route path="/insecure-design" element={<InsecureDesign />} />
+          <Route path="/insecure-design/sandbox" element={<InsecureDesignSandbox />} />
 
-            <Route path="/injection" element={<Injection />} />
-            <Route path="/injection-sandbox" element={<InjectionSandbox />} />
+          <Route path="/security-misconfiguration" element={<SecurityMisconfiguration />} />
+          <Route path="/security-misconfiguration/sandbox" element={<SecurityMisconfigurationSandbox />} />
 
-            <Route path="/insecure-design" element={<InsecureDesign />} />
-            <Route path="/insecure-design/sandbox" element={<InsecureDesignSandbox />} />
+          <Route path="/vulnerable-components" element={<VulnerableComponents />} />
+          <Route path="/authentication-failures" element={<AuthenticationFailures />} />
+          <Route path="/software-data-integrity" element={<SoftwareDataIntegrity />} />
+          <Route path="/security-logging-failures" element={<SecurityLoggingFailures />} />
+          <Route path="/server-side-request-forgery" element={<ServerSideRequestForgery />} />
 
-            <Route path="/security-misconfiguration" element={<SecurityMisconfiguration />} />
-            <Route path="/security-misconfiguration/sandbox" element={<SecurityMisconfigurationSandbox />} />
+          {/* Other Sandbox Routes */}
+          <Route path="/sandbox/authentication-failures" element={<AuthenticationSandbox />} />
+          <Route path="/sandbox/broken-access-control" element={<BrokenAccessControlSandbox key={Date.now()} />} />
 
-            <Route path="/vulnerable-components" element={<VulnerableComponents />} />
-            <Route path="/authentication-failures" element={<AuthenticationFailures />} />
-            <Route path="/software-data-integrity" element={<SoftwareDataIntegrity />} />
-            <Route path="/security-logging-failures" element={<SecurityLoggingFailures />} />
-            <Route path="/server-side-request-forgery" element={<ServerSideRequestForgery />} />
-
-            {/* Other Sandbox Routes */}
-            <Route path="/sandbox/authentication-failures" element={<AuthenticationSandbox />} />
-            <Route path="/sandbox/broken-access-control" element={<BrokenAccessControlSandbox key={Date.now()} />} />
-
-            {/* 404 Fallback */}
-            <Route
-              path="*"
-              element={
-                <div style={{ textAlign: 'center', marginTop: '100px' }}>
-                  <h2>404 - Page Not Found</h2>
-                </div>
-              }
-            />
-
-          </Routes>
-        </main>
-
-        <Footer />
-      </div>
+          {/* 404 Fallback */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
     </Router>
   );
 }
