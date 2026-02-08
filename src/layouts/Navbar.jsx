@@ -214,7 +214,7 @@ export default function Navbar() {
           </button>
           
           {/* Logo */}
-          <div className='logo'>
+          <div className='logo' onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
             <img src="/logo32.png" alt="Logo" />
           </div>
         </div>
