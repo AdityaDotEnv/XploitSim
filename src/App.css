@@ -49,26 +49,19 @@
   position: fixed;
   top: 0;
   left: 0;
-  padding: 10px 20px;
-  height: 75px;
+  padding: 0 40px;
+  height: 70px;
   width: 100%;
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  background: linear-gradient(to right,
-    #B139FB 0%,
-    #000331 21%,
-    #000997 38%,
-    #591E96 56%,
-    #000331 78%,
-    #34B24A 95%,
-    #8AF6FD 100%
-  ) !important;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  background: rgba(0, 3, 49, 0.9) !important;
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .align-left {
@@ -79,21 +72,32 @@
 
 /* Menu Button */
 .menu-btn {
-  background: rgba(255, 255, 255, 0.1);
+  background: transparent;
   color: white;
-  border: none;
-  font-size: 1.5rem;
-  padding: 0.5rem 0.75rem;
-  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 1.8rem;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1001;
+  line-height: 1;
+  padding: 0;
 }
 
 .menu-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+  border-color: #3498db;
+  box-shadow: 0 0 15px rgba(52, 152, 219, 0.4);
+}
+
+.menu-btn:active {
+  transform: scale(0.95);
 }
 
 /* Mobile Navigation - Integrated into navbar */
@@ -213,14 +217,37 @@
 
 .desktop-nav-links a {
   text-decoration: none;
-  color: rgb(241, 236, 236);
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 500;
-  transition: color 0.3s ease;
+  font-size: 1.05rem;
+  transition: all 0.2s ease;
+  padding: 8px 16px;
+  border-radius: 6px;
+  position: relative;
 }
 
 .desktop-nav-links a:hover {
-  color: #ff9800;
+  color: #3498db;
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
 }
+
+.desktop-nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #3498db;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.desktop-nav-links a:hover::after {
+  width: 70%;
+}
+
 
 /* Scrollbar styling for mobile nav */
 .mobile-nav::-webkit-scrollbar {
@@ -243,7 +270,7 @@
 /* ===== MAIN CONTENT - NO GAPS ===== */
 .main-content {
   flex: 1;
-  margin-top: 60px; /* Same as navbar height */
+  margin-top: 70px; /* Match updated navbar height */
   padding-top: 0;
 }
 
@@ -753,21 +780,4 @@ html {
   }
 }
 
-/* ===== MERGED NAVBAR STYLES FROM DUPLICATE App.css ===== */
-
-.navbar {
-  background: linear-gradient(to right, 
-    rgba(177, 57, 251, 0.7) 0%,   
-    rgba(0, 3, 49, 0.7) 21%,  
-    rgba(0, 9, 151, 0.7) 38%,  
-    rgba(89, 30, 150, 0.7) 56%,  
-    rgba(0, 3, 49, 0.7) 78%,  
-    rgba(52, 178, 74, 0.7) 95%, 
-    rgba(138, 246, 253, 0.7) 100%  
-  ), url('/logo.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding: 10px 10px 5px 10px;
-  height: 60px;
-}
+/* End of App.css */
