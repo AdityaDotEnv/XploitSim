@@ -1,6 +1,6 @@
 # 🧠 XploitSim – Interactive OWASP Vulnerability Sandbox
 
-🚀 **Live Demo:** [xploitsim.netlify.app](https://xploitism.onrender.com)  
+🚀 **Live Demo:** [xploitsim.render.com](https://xploitism.onrender.com)  
 💻 **Built With:** React, Vite, Node.js (Centralized Backend), SQLite
 
 ---
