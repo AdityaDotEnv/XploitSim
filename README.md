@@ -49,7 +49,7 @@ All vulnerabilities are active and centralized. You can start all of them with a
 | **A03**  | Injection                                   | 5100         | ✅ Active   |
 | **A04**  | Insecure Design                             | 5200         | ✅ Active   |
 | **A05**  | Security Misconfiguration                   | 5300         | ✅ Active   |
-| **A06**  | Vulnerable & Outdated Components           | 5050         | ✅ Active   |
+| **A06**  | Vulnerable & Outdated Components           | 5002         | ✅ Active   |
 | **A07**  | Authentication Failures                    | Internal     | ✅ Active   |
 | **A08**  | Software & Data Integrity Failures         | 5400         | ✅ Active   |
 | **A09**  | Security Logging & Monitoring Failures     | 5600         | ✅ Active   |
@@ -83,6 +83,33 @@ Open [http://localhost:5173](http://localhost:5173) (or the port shown in your t
 
 ---
 
+# 🐳 Docker Support
+
+XploitSim is fully containerized for easy local testing and production deployment.
+
+### Run with Docker
+```bash
+# Build the image
+docker build -t xploitsim .
+
+# Run the container
+docker run -p 10000:10000 xploitsim
+```
+The app will be available at [http://localhost:10000](http://localhost:10000).
+
+---
+
+# 🚀 Deployment (Render)
+
+This project is optimized for deployment on **Render** (or any Docker-capable host). 
+
+1. Create a new **Web Service** on Render.
+2. Connect your repository.
+3. Select **Docker** as the Runtime.
+4. Render will automatically use the `Dockerfile` to build and deploy both the frontend and all 9 backend microservices in a single container.
+
+---
+
 # 🔌 Backend Commands (Optional)
 
 If you only want to work on the servers:
@@ -100,6 +127,7 @@ If you only want to work on the servers:
 | **Backend**      | Node.js + Express             |
 | **Database**     | SQLite 3                      |
 | **Styling**      | Vanilla CSS + CSS Modules     |
+| **Deployment**   | Docker + Render Gateway       |
 | **Concurrency**  | Concurrently (Unified Start)  |
 
 ---
