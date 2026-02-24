@@ -1,14 +1,19 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const fs = require("fs");
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import fs from "fs";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
 // ⚠️ VULNERABLE: log file with weak permissions
-const LOG_FILE = __dirname + "/weak-log.txt";
+const LOG_FILE = join(__dirname, "weak-log.txt");
 
 // Ensure log file exists
 if (!fs.existsSync(LOG_FILE)) {

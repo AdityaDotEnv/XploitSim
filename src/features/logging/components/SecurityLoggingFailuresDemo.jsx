@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { getApiUrl } from "../../../config/api";
 
 export default function SecurityLoggingFailuresDemo() {
   const [result, setResult] = useState(null);
 
   async function call(route, method = "POST", body = {}) {
-    const res = await fetch(`http://127.0.0.1:5600/api/${route}`, {
+    const res = await fetch(getApiUrl(5600, `/api/${route}`), {
       method,
       headers: { "Content-Type": "application/json" },
       body: method === "POST" ? JSON.stringify(body) : undefined,

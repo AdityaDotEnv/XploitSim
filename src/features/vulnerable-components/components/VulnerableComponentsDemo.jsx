@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { getApiUrl } from "../../../config/api";
 
 export default function VulnerableComponentsDemo() {
   const [message, setMessage] = useState("Loading...");
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5001/api/data")
+    fetch(getApiUrl(5002, "/api/data"))
       .then((res) => res.json())
       .then((data) => {
         setMessage(data.message);

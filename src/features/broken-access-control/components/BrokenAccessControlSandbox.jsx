@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "../assets/BrokenAccessControlSandbox.css";
 import { useNavigate } from "react-router-dom";
-
-const API_URL = "http://localhost:4000";
+import { getApiUrl } from "../../../config/api";
 
 const BrokenAccessControlSandbox = () => {
   const navigate = useNavigate();
@@ -27,7 +26,7 @@ const BrokenAccessControlSandbox = () => {
     setLogs([]);
 
     try {
-      const res = await fetch(`${API_URL}/auth/login`, {
+      const res = await fetch(getApiUrl(4000, "/auth/login"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -51,7 +50,7 @@ const BrokenAccessControlSandbox = () => {
 
   const accessDoc = async (targetDocId) => {
     try {
-      const res = await fetch(`${API_URL}/documents/${targetDocId}`, {
+      const res = await fetch(getApiUrl(4000, `/documents/${targetDocId}`), {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
       const data = await res.json();
@@ -92,18 +91,16 @@ const BrokenAccessControlSandbox = () => {
 
         <div className="sandbox-buttons">
           <button
-            className={`frontend-btn ${
-              activeUser === "alice" ? "active" : ""
-            }`}
+            className={`frontend-btn ${activeUser === "alice" ? "active" : ""
+              }`}
             onClick={() => login("alice", "password1")}
           >
             🔐 Login as Alice
           </button>
 
           <button
-            className={`frontend-btn ${
-              activeUser === "bob" ? "active" : ""
-            }`}
+            className={`frontend-btn ${activeUser === "bob" ? "active" : ""
+              }`}
             onClick={() => login("bob", "password2")}
           >
             🔐 Login as Bob
