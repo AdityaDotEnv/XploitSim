@@ -6,44 +6,44 @@ const OWASPTop10 = () => {
     {
       id: 1,
       name: "Broken Access Control",
-      description: "Restrictions on what authenticated users are allowed to do are not properly enforced, allowing attackers to access unauthorized functionality or data.",
+      description: "Restrictions on what authenticated users are allowed to do are not properly enforced. Now includes Server-Side Request Forgery (SSRF).",
       link: "/broken-access-control",
       image: "/brokenaccesscontrol.png",
     },
     {
       id: 2,
-      name: "Cryptographic Failures",
-      description: "Failures related to cryptography which often lead to exposure of sensitive data like passwords, credit cards, and health records.",
-      link: "/cryptographic-failures",
-      image: "/cryptography.png",
-    },
-    {
-      id: 3,
-      name: "Injection",
-      description: "Untrusted data is sent to an interpreter as part of a command or query, leading to data loss, corruption, or unauthorized access.",
-      link: "/injection",
-      image: "/injuction.png",
-    },
-    {
-      id: 4,
-      name: "Insecure Design",
-      description: "Missing or ineffective control design that fails to prevent security flaws before implementation.",
-      link: "/insecure-design",
-      image: "/insecuredesign.png",
-    },
-    {
-      id: 5,
       name: "Security Misconfiguration",
       description: "Insecure configurations in any part of the application stack, from network services to platform settings.",
       link: "/security-misconfiguration",
       image: "/securitymissconfiguration.png",
     },
     {
+      id: 3,
+      name: "Software Supply Chain Failures",
+      description: "Expands on vulnerable components to cover the entire software ecosystem, including dependencies, build systems, and distribution.",
+      link: "/software-supply-chain-failures",
+      image: "./vulnerablecomponent.png", // reusing similar image
+    },
+    {
+      id: 4,
+      name: "Cryptographic Failures",
+      description: "Failures related to cryptography which often lead to exposure of sensitive data like passwords, credit cards, and health records.",
+      link: "/cryptographic-failures",
+      image: "/cryptography.png",
+    },
+    {
+      id: 5,
+      name: "Injection",
+      description: "Untrusted data is sent to an interpreter as part of a command or query, leading to data loss, corruption, or unauthorized access.",
+      link: "/injection",
+      image: "/injuction.png",
+    },
+    {
       id: 6,
-      name: "Vulnerable Components",
-      description: "Using components with known vulnerabilities that can be exploited to compromise applications.",
-      link: "/vulnerable-components",
-      image: "./vulnerablecomponent.png",
+      name: "Insecure Design",
+      description: "Missing or ineffective control design that fails to prevent security flaws before implementation.",
+      link: "/insecure-design",
+      image: "/insecuredesign.png",
     },
     {
       id: 7,
@@ -54,30 +54,30 @@ const OWASPTop10 = () => {
     },
     {
       id: 8,
-      name: "Software & Data Integrity",
+      name: "Software & Data Integrity Failures",
       description: "Failures related to software updates, critical data, and CI/CD pipelines without integrity verification.",
-      link: "/software-data-integrity",
+      link: "/software-data-integrity", // preserving existing route
       image: "./softwaredataintegrity.png"
     },
     {
       id: 9,
-      name: "Security Logging Failures",
+      name: "Logging & Alerting Failures",
       description: "Failures in logging, monitoring, and incident response capabilities that prevent threat detection.",
-      link: "/security-logging-failures",
+      link: "/security-logging-failures", // preserving existing route
       image: "./securityloggingfailure.png",
     },
     {
       id: 10,
-      name: "Server-Side Request Forgery",
-      description: "Web applications that fetch remote resources without validating user-supplied URLs.",
-      link: "/server-side-request-forgery",
-      image: "/serversideforgery.png",
+      name: "Mishandling of Exceptional Conditions",
+      description: "Secure error handling, logical flaws, and insecure failure states leading to sensitive data exposure or denial-of-service.",
+      link: "/mishandling-exceptional-conditions",
+      image: "./cryptography.png", // new item dummy image
     }
   ];
 
   const handleLearnMoreClick = (e, link) => {
     e.preventDefault();
-    
+
     // Navigate to the actual page
     window.location.href = link;
   };
