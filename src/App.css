@@ -86,9 +86,10 @@
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1001;
+  z-index: 2001; /* Above mobile-nav-content */
   line-height: 1;
   padding: 0;
+  margin-left: 15px; /* Moved away from extreme left */
 }
 
 .menu-btn:hover {
@@ -138,15 +139,16 @@
 }
 
 .vulnerability-list li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.2rem; /* Increased spacing between items */
 }
 
 .nav-link {
   display: flex;
   align-items: center;
   padding: 0.75rem 1rem;
-  color: #ecf0f1;
+  color: #ffffff !important; /* Force white color for visibility */
   text-decoration: none;
+  font-size: 1.15rem; /* Slightly bigger font */
   border-radius: 8px;
   transition: all 0.3s ease;
   border-left: 3px solid transparent;
