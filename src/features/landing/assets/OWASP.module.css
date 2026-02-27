@@ -57,6 +57,8 @@
   gap: 1.5rem;
   overflow: visible;
   position: relative;
+  margin-bottom: 2.5rem;
+  /* Added margin for vertical spacing between rows */
 }
 
 /* Remove all overlapping margins */
