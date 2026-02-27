@@ -5,6 +5,7 @@ import './App.css';
 import ScrollToTop from './components/ScrollToTop.tsx';
 import MainLayout from './layouts/MainLayout.tsx';
 import HomePage from './pages/HomePage.tsx';
+import AboutPage from './pages/AboutPage.tsx';
 import NotFoundPage from './pages/NotFoundPage.tsx';
 
 // Feature Components
@@ -39,6 +40,7 @@ function App() {
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
 
           {/* Vulnerability Pages */}
           <Route path="/broken-access-control" element={<BrokenAccessControl />} />
