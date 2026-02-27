@@ -6,44 +6,44 @@ const OWASPTop10 = () => {
     {
       id: 1,
       name: "Broken Access Control",
-      description: "Restrictions on what authenticated users are allowed to do are not properly enforced. Now includes Server-Side Request Forgery (SSRF).",
+      description: "Restrictions on what authenticated users are allowed to do are not properly enforced, allowing attackers to access unauthorized functionality or data.",
       link: "/broken-access-control",
       image: "/brokenaccesscontrol.png",
     },
     {
       id: 2,
-      name: "Security Misconfiguration",
-      description: "Insecure configurations in any part of the application stack, from network services to platform settings.",
-      link: "/security-misconfiguration",
-      image: "/securitymissconfiguration.png",
-    },
-    {
-      id: 3,
-      name: "Software Supply Chain Failures",
-      description: "Expands on vulnerable components to cover the entire software ecosystem, including dependencies, build systems, and distribution.",
-      link: "/software-supply-chain-failures",
-      image: "./vulnerablecomponent.png", // reusing similar image
-    },
-    {
-      id: 4,
       name: "Cryptographic Failures",
       description: "Failures related to cryptography which often lead to exposure of sensitive data like passwords, credit cards, and health records.",
       link: "/cryptographic-failures",
       image: "/cryptography.png",
     },
     {
-      id: 5,
+      id: 3,
       name: "Injection",
       description: "Untrusted data is sent to an interpreter as part of a command or query, leading to data loss, corruption, or unauthorized access.",
       link: "/injection",
       image: "/injuction.png",
     },
     {
-      id: 6,
+      id: 4,
       name: "Insecure Design",
       description: "Missing or ineffective control design that fails to prevent security flaws before implementation.",
       link: "/insecure-design",
       image: "/insecuredesign.png",
+    },
+    {
+      id: 5,
+      name: "Security Misconfiguration",
+      description: "Insecure configurations in any part of the application stack, from network services to platform settings.",
+      link: "/security-misconfiguration",
+      image: "/securitymissconfiguration.png",
+    },
+    {
+      id: 6,
+      name: "Vulnerable Components",
+      description: "Using components with known vulnerabilities that can be exploited to compromise applications.",
+      link: "/vulnerable-components",
+      image: "./vulnerablecomponent.png",
     },
     {
       id: 7,
@@ -54,24 +54,43 @@ const OWASPTop10 = () => {
     },
     {
       id: 8,
-      name: "Software & Data Integrity Failures",
+      name: "Software & Data Integrity",
       description: "Failures related to software updates, critical data, and CI/CD pipelines without integrity verification.",
-      link: "/software-data-integrity", // preserving existing route
+      link: "/software-data-integrity",
       image: "./softwaredataintegrity.png"
     },
     {
       id: 9,
-      name: "Logging & Alerting Failures",
+      name: "Security Logging Failures",
       description: "Failures in logging, monitoring, and incident response capabilities that prevent threat detection.",
-      link: "/security-logging-failures", // preserving existing route
+      link: "/security-logging-failures",
       image: "./securityloggingfailure.png",
     },
     {
       id: 10,
+      name: "Server-Side Request Forgery",
+      description: "Web applications that fetch remote resources without validating user-supplied URLs.",
+      link: "/server-side-request-forgery",
+      image: "/serversideforgery.png",
+    }
+  ];
+
+  const newVulnerabilities2025 = [
+    {
+      id: "3",
+      name: "Software Supply Chain Failures",
+      description: "Expands on vulnerable components to cover the entire software ecosystem, including dependencies, build systems, and distribution.",
+      link: "/software-supply-chain-failures",
+      image: "./SSCF.png",
+      isNew: true,
+    },
+    {
+      id: "10",
       name: "Mishandling of Exceptional Conditions",
       description: "Secure error handling, logical flaws, and insecure failure states leading to sensitive data exposure or denial-of-service.",
       link: "/mishandling-exceptional-conditions",
-      image: "./cryptography.png", // new item dummy image
+      image: "/MofExcepCond.png",
+      isNew: true,
     }
   ];
 
@@ -149,6 +168,18 @@ const OWASPTop10 = () => {
         <div className={styles.row}>
           {vulnerabilities.slice(5, 10).map((vuln) => (
             <VulnerabilityCard key={vuln.id} vulnerability={vuln} />
+          ))}
+        </div>
+
+        <div className={styles.newSectionHeader}>
+          <h2>New in OWASP Draft 2025</h2>
+          <div className={styles.divider}></div>
+        </div>
+
+        {/* Third Row - New 2025 Items */}
+        <div className={`${styles.row} ${styles.newRow}`}>
+          {newVulnerabilities2025.map((vuln, index) => (
+            <VulnerabilityCard key={`new-${index}`} vulnerability={vuln} />
           ))}
         </div>
       </div>
