@@ -12,6 +12,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #000331;
 }
 
 .App-logo {
@@ -58,7 +59,7 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  background: rgba(0, 3, 49, 0.9) !important;
+  background: #000331 !important; /* Solid background to prevent white bar transparency issues */
   backdrop-filter: blur(15px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
@@ -85,9 +86,10 @@
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1001;
+  z-index: 2001; /* Above mobile-nav-content */
   line-height: 1;
   padding: 0;
+  margin-left: 15px; /* Moved away from extreme left */
 }
 
 .menu-btn:hover {
@@ -101,17 +103,18 @@
   transform: scale(0.95);
 }
 
-/* Mobile Navigation - Integrated into navbar */
+/* Mobile Navigation - Updated colors to match brand */
 .mobile-nav {
   position: fixed;
   top: 0;
   left: -100%;
   width: 280px;
   height: 100vh;
-  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-  box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
+  background: #000331; /* Matched Navbar */
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
   transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1000;
+  z-index: 2000; /* Ensure it stays above everything */
   padding: 2rem 1.5rem;
   overflow-y: auto;
 }
@@ -136,15 +139,16 @@
 }
 
 .vulnerability-list li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.2rem; /* Increased spacing between items */
 }
 
 .nav-link {
   display: flex;
   align-items: center;
   padding: 0.75rem 1rem;
-  color: #ecf0f1;
+  color: #ffffff !important; /* Force white color for visibility */
   text-decoration: none;
+  font-size: 1.15rem; /* Slightly bigger font */
   border-radius: 8px;
   transition: all 0.3s ease;
   border-left: 3px solid transparent;
@@ -670,19 +674,13 @@
   }
 }
 
-/* ===== FOOTER - NO GAP ===== */
+/* ===== FOOTER - REFACTORED ===== */
 .footer {
-  background: linear-gradient(to right,
-      #B139FB 0%,
-      #000331 21%,
-      #000997 38%,
-      #591E96 56%,
-      #000331 78%,
-      #34B24A 95%,
-      #8AF6FD 100%);
+  background: #000331;
   color: #fff;
-  padding: 40px 60px 20px;
+  padding: 60px 60px 20px;
   margin-top: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-container {
