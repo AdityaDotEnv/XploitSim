@@ -44,7 +44,7 @@ export default function CryptographicFailuresSandbox() {
   async function postJSON(path, payload) {
     setLoading(true);
     try {
-      const res = await fetch(API_BASE + path, {
+      const res = await fetch(getApiUrl(5001, path), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -130,7 +130,7 @@ export default function CryptographicFailuresSandbox() {
 
   const revealSecret = async () => {
     try {
-      const res = await fetch(API_BASE + "/users/1/secret");
+      const res = await fetch(getApiUrl(5001, "/users/1/secret"));
       const body = await res.json().catch(() => null);
       addResult(
         "Reveal Secret (User 1)",

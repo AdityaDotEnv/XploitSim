@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "../assets/SecurityMisconfigurationSandbox.module.css";
+import { getApiUrl } from "../../../config/api";
 
 // Vite-compatible environment variable fallback
 const API_BASE = (import.meta.env.VITE_API_URL || "http://localhost:5000") + "/api/security-misconfiguration";

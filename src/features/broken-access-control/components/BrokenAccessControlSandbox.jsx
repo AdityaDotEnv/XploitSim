@@ -27,7 +27,7 @@ const BrokenAccessControlSandbox = () => {
     setLogs([]);
 
     try {
-      const res = await fetch(`${API_URL}/auth/login`, {
+      const res = await fetch(getApiUrl(4000, "/auth/login"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -51,7 +51,7 @@ const BrokenAccessControlSandbox = () => {
 
   const accessDoc = async (targetDocId) => {
     try {
-      const res = await fetch(`${API_URL}/documents/${targetDocId}`, {
+      const res = await fetch(getApiUrl(4000, `/documents/${targetDocId}`), {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
       const data = await res.json();

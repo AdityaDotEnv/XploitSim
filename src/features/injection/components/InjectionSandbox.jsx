@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "../assets/InjectionSandbox.module.css";
+import { getApiUrl } from "../../../config/api";
 
 export default function InjectionSandbox() {
   const [q, setQ] = useState("");
@@ -12,7 +13,7 @@ export default function InjectionSandbox() {
   async function testVulnerable() {
     try {
       const res = await fetch(
-        `${API_BASE}/vulnerable/users?q=${encodeURIComponent(q)}`
+        getApiUrl(5100, `/vulnerable/users?q=${encodeURIComponent(q)}`)
       );
       const json = await res.json();
       setVulnerableRes(json);
@@ -25,7 +26,7 @@ export default function InjectionSandbox() {
   async function testSafe() {
     try {
       const res = await fetch(
-        `${API_BASE}/safe/users?q=${encodeURIComponent(q)}`
+        getApiUrl(5100, `/safe/users?q=${encodeURIComponent(q)}`)
       );
       const json = await res.json();
       setSafeRes(json);
@@ -37,7 +38,7 @@ export default function InjectionSandbox() {
 
   async function testEcho() {
     try {
-      const res = await fetch(`${API_BASE}/vulnerable/echo`, {
+      const res = await fetch(getApiUrl(5100, "/vulnerable/echo"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: q }),

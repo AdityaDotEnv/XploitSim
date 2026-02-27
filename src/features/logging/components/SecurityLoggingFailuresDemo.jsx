@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { getApiUrl } from "../../../config/api";
 
 export default function SecurityLoggingFailuresDemo() {
   const [result, setResult] = useState(null);

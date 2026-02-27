@@ -5,6 +5,15 @@ const fs = require("fs");
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../../.env') });
 
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import fs from "fs";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 app.use(cors());

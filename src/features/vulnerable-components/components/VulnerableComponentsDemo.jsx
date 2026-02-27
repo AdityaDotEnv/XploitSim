@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { getApiUrl } from "../../../config/api";
 
 export default function VulnerableComponentsDemo() {
   const [message, setMessage] = useState("Loading...");
