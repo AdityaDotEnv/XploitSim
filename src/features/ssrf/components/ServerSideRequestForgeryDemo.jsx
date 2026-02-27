@@ -6,7 +6,8 @@ export default function ServerSideRequestForgeryDemo() {
 
   async function sendRequest() {
     try {
-      const res = await fetch("http://127.0.0.1:5500/api/ssrf", {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      const res = await fetch(`${API_URL}/api/server-side-request-forgery/api/ssrf`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: targetUrl }),

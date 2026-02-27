@@ -4,7 +4,8 @@ export default function SecurityLoggingFailuresDemo() {
   const [result, setResult] = useState(null);
 
   async function call(route, method = "POST", body = {}) {
-    const res = await fetch(`http://127.0.0.1:5600/api/${route}`, {
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    const res = await fetch(`${API_URL}/api/security-logging-failures/api/${route}`, {
       method,
       headers: { "Content-Type": "application/json" },
       body: method === "POST" ? JSON.stringify(body) : undefined,

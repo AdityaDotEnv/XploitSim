@@ -1,13 +1,16 @@
 // server/broken-access-control/server.js
 import express from "express";
 import cors from "cors";
-import jwt from "jsonwebtoken";
+import { signToken } from "../shared/auth.js";
+import { requireAuth } from "../shared/middleware.js";
 import { db } from "./db.js";
+import dotenv from "dotenv";
+dotenv.config({ path: "../../.env" });
+
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-const SECRET = "vulnerable_secret";
 
 // ---- Authentication ----
 app.post("/auth/login", (req, res) => {
@@ -18,24 +21,14 @@ app.post("/auth/login", (req, res) => {
     if (err) return res.status(500).json({ error: "DB error" });
     if (!user) return res.status(401).json({ error: "Invalid credentials" });
 
-    const token = jwt.sign({ id: user.id, username: user.username, role: user.role }, SECRET, { expiresIn: "2h" });
+    // Use shared signing
+    const token = signToken({ id: user.id, username: user.username, role: user.role });
     res.json({ token });
   });
 });
 
-// small helper middleware to parse Authorization header and set req.user if valid
-function requireAuth(req, res, next) {
-  const auth = req.headers.authorization;
-  if (!auth) return res.status(401).json({ error: "Missing token" });
-  const token = auth.split(" ")[1];
-  if (!token) return res.status(401).json({ error: "Missing token" });
-  try {
-    req.user = jwt.verify(token, SECRET);
-    next();
-  } catch (err) {
-    return res.status(401).json({ error: "Invalid token" });
-  }
-}
+// Middleware now imported from shared
+
 
 /**
  * Important: place the owner-listing endpoint BEFORE the generic :id route
@@ -115,5 +108,7 @@ app.get("/", (req, res) => {
   res.json({ message: "XploitSim - broken access control demo (SANDBOX)" });
 });
 
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`🚀 Vulnerable server running on http://localhost:${PORT}`));
+const PORT = process.env.BAC_PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`✅ Broken Access Control sandbox running on http://localhost:${PORT}`);
+});

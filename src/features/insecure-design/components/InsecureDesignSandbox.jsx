@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from '../assets/InsecureDesignSandbox.module.css';
 
-const API_BASE = "http://localhost:5200";
+const API_BASE = (import.meta.env.VITE_API_URL || "http://localhost:5000") + "/api/insecure-design";
 
 export default function InsecureDesignSandbox() {
   const [configVuln, setConfigVuln] = useState(null);
@@ -124,8 +124,8 @@ export default function InsecureDesignSandbox() {
             {toggleRes
               ? JSON.stringify(toggleRes, null, 2)
               : errorRes
-              ? JSON.stringify(errorRes, null, 2)
-              : "No result yet. Toggle features or trigger errors to see results."}
+                ? JSON.stringify(errorRes, null, 2)
+                : "No result yet. Toggle features or trigger errors to see results."}
           </pre>
         </section>
       </div>
@@ -142,8 +142,8 @@ export default function InsecureDesignSandbox() {
             <b>Fetch Safe Config:</b> Shows only safe, non-sensitive values like flags.
           </li>
           <li>
-            <b>Toggle Features:</b>  
-            Enter a feature name (e.g. <code>debug</code> or <code>featureXEnabled</code>)  
+            <b>Toggle Features:</b>
+            Enter a feature name (e.g. <code>debug</code> or <code>featureXEnabled</code>)
             then click:
             <ul>
               <li><b>Toggle (Vulnerable):</b> No authentication — anyone can modify system settings.</li>

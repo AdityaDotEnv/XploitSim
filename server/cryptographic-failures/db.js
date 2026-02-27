@@ -5,9 +5,7 @@ import { fileURLToPath } from "url";
 import fs from "fs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const dbFolder = path.join(__dirname, "db");
-if (!fs.existsSync(dbFolder)) fs.mkdirSync(dbFolder);
-export const DB_PATH = path.join(dbFolder, "crypto_demo.sqlite");
+export const DB_PATH = path.join(__dirname, "..", "data", "crypto.sqlite");
 
 sqlite3.verbose();
 export const db = new sqlite3.Database(DB_PATH, (err) => {

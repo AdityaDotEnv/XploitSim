@@ -1,6 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+
 const axios = require("axios");
 
 const app = express();
@@ -44,6 +47,7 @@ app.get("/api/ssrf/safe", (req, res) => {
   });
 });
 
-app.listen(5500, "127.0.0.1", () => {
+const PORT = process.env.SSRF_PORT || 5500;
+app.listen(PORT, "127.0.0.1", () => {
   console.log("SSRF demo running at http://127.0.0.1:5500");
 });

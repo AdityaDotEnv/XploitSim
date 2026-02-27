@@ -38,22 +38,33 @@ src/
 
 ---
 
-# 🌐 Supported Vulnerabilities (Port Map)
+# 🌐 Full-Stack Architecture (Port Map)
 
-All vulnerabilities are active and centralized. You can start all of them with a single command.
+The project now follows a robust full-stack architecture with a centralized **API Gateway** acting as the single entry point for all frontend requests.
 
-| OWASP ID | Vulnerability Name                        | Backend Port | Status      |
-|----------|--------------------------------------------|--------------|-------------|
-| **A01**  | Broken Access Control                      | 4000         | ✅ Active   |
-| **A02**  | Cryptographic Failures                     | 5001         | ✅ Active   |
-| **A03**  | Injection                                   | 5100         | ✅ Active   |
-| **A04**  | Insecure Design                             | 5200         | ✅ Active   |
-| **A05**  | Security Misconfiguration                   | 5300         | ✅ Active   |
-| **A06**  | Vulnerable & Outdated Components           | 5050         | ✅ Active   |
-| **A07**  | Authentication Failures                    | Internal     | ✅ Active   |
-| **A08**  | Software & Data Integrity Failures         | 5400         | ✅ Active   |
-| **A09**  | Security Logging & Monitoring Failures     | 5600         | ✅ Active   |
-| **A10**  | Server-Side Request Forgery (SSRF)         | 5500         | ✅ Active   |
+| Component | Port | Description |
+|-----------|------|-------------|
+| **Frontend (React)** | 5173 | The main UI |
+| **API Gateway** | **5000** | **Single Entry Point** for all API calls |
+| **Auth Service** | 4100 | Centralized Identity / JWT Provider |
+| **Data Layer** | N/A | Centralized in `server/data/*.sqlite` |
+
+### Integrated Microservices (Routed via Gateway)
+
+All feature modules are accessible via `http://localhost:5000/api/<module-name>`.
+
+| OWASP ID | Vulnerability Name | Internal Port | Status |
+|----------|-------------------|---------------|--------|
+| **A01** | Broken Access Control | 4000 | ✅ Active |
+| **A02** | Cryptographic Failures | 5001 | ✅ Active |
+| **A03** | Injection | 5100 | ✅ Active |
+| **A04** | Insecure Design | 5200 | ✅ Active |
+| **A05** | Security Misconfiguration | 5300 | ✅ Active |
+| **A06** | Vulnerable Components | 5002 | ✅ Active |
+| **A08** | Software/Data Integrity | 5400 | ✅ Active |
+| **A09** | Security Logging | 5600 | ✅ Active |
+| **A10** | SSRF | 5500 | ✅ Active |
+
 
 ---
 

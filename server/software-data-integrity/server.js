@@ -1,6 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+
 
 const app = express();
 app.use(cors());
@@ -35,6 +38,7 @@ app.get("/api/update/signed", (req, res) => {
 });
 
 // Start server
-app.listen(5400, "127.0.0.1", () => {
+const PORT = process.env.INTEGRITY_PORT || 5400;
+app.listen(PORT, "127.0.0.1", () => {
   console.log("Software/Data Integrity demo running at http://127.0.0.1:5400");
 });

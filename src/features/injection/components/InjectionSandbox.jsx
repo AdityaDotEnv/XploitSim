@@ -7,7 +7,7 @@ export default function InjectionSandbox() {
   const [safeRes, setSafeRes] = useState(null);
   const [echoRes, setEchoRes] = useState(null);
 
-  const API_BASE = "http://localhost:5100";
+  const API_BASE = (import.meta.env.VITE_API_URL || "http://localhost:5000") + "/api/injection";
 
   async function testVulnerable() {
     try {
@@ -57,7 +57,7 @@ export default function InjectionSandbox() {
         <div className={styles.badge}>Injection Vulnerability</div>
         <h1 className={styles.title}>Injection Sandbox</h1>
         <p className={styles.lead}>
-          Experiment with SQL injection and input reflection. Compare vulnerable 
+          Experiment with SQL injection and input reflection. Compare vulnerable
           and secure endpoints to understand injection prevention techniques.
         </p>
       </div>
@@ -129,19 +129,19 @@ export default function InjectionSandbox() {
         <h4>🎓 Learning Tips & Examples</h4>
         <ul>
           <li>
-            Try SQL injection payloads like <code>%' OR '1'='1</code> or 
+            Try SQL injection payloads like <code>%' OR '1'='1</code> or
             <code>' UNION SELECT username, password FROM users--</code> to see database exposure.
           </li>
           <li>
-            The safe endpoint uses parameterized queries that prevent SQL injection 
+            The safe endpoint uses parameterized queries that prevent SQL injection
             by separating data from commands.
           </li>
           <li>
-            The Echo endpoint demonstrates reflected input that could enable XSS attacks 
+            The Echo endpoint demonstrates reflected input that could enable XSS attacks
             if not properly sanitized.
           </li>
           <li>
-            Experiment with XSS payloads like <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code> 
+            Experiment with XSS payloads like <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code>
             in the echo endpoint to understand reflection risks.
           </li>
         </ul>

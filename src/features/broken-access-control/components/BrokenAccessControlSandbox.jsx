@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../assets/BrokenAccessControlSandbox.css";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = "http://localhost:4000";
+const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:5000") + "/api/broken-access-control";
 
 const BrokenAccessControlSandbox = () => {
   const navigate = useNavigate();
@@ -92,18 +92,16 @@ const BrokenAccessControlSandbox = () => {
 
         <div className="sandbox-buttons">
           <button
-            className={`frontend-btn ${
-              activeUser === "alice" ? "active" : ""
-            }`}
+            className={`frontend-btn ${activeUser === "alice" ? "active" : ""
+              }`}
             onClick={() => login("alice", "password1")}
           >
             🔐 Login as Alice
           </button>
 
           <button
-            className={`frontend-btn ${
-              activeUser === "bob" ? "active" : ""
-            }`}
+            className={`frontend-btn ${activeUser === "bob" ? "active" : ""
+              }`}
             onClick={() => login("bob", "password2")}
           >
             🔐 Login as Bob

@@ -1,39 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../../../index.css';
 import '../../vulnerable-components/assets/VulnerabilityPage.css';
-import '../../broken-access-control/assets/BrokenAccessControl.css'; 
+import '../../broken-access-control/assets/BrokenAccessControl.css';
 import '../assets/AuthenticationSandbox.css';
-// reuse bac-hero styles
 
-const LOCAL_USERS_KEY = 'xploitsim_users_v1';
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 const LOCAL_LOG_KEY = 'xploitsim_attacklog_v1';
 
-const DEFAULT_USERS = [
-  { username: 'alice', password: 'Password@123', attempts: 0, lockedUntil: 0 },
-  { username: 'bob', password: 'qwerty', attempts: 0, lockedUntil: 0 },
-  { username: 'admin', password: 'admin123', attempts: 0, lockedUntil: 0 }
-];
-
-const MAX_ATTEMPTS = 5;
-const LOCK_DURATION_MS = 60 * 1000;
-
 export default function AuthenticationSandbox() {
-  const [users, setUsers] = useState(() => {
-    try {
-      const raw = localStorage.getItem(LOCAL_USERS_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        return parsed.map(u => ({ attempts: 0, lockedUntil: 0, ...u }));
-      }
-    } catch {}
-    return DEFAULT_USERS.slice();
-  });
-
   const [attackLog, setAttackLog] = useState(() => {
     try {
       const raw = localStorage.getItem(LOCAL_LOG_KEY);
       if (raw) return JSON.parse(raw);
-    } catch {}
+    } catch { }
     return [];
   });
 
@@ -44,30 +23,14 @@ export default function AuthenticationSandbox() {
   const simCancelRef = useRef(false);
   const consoleRef = useRef(null);
 
-  // Replay controls (kept if used later)
-  // eslint-disable-next-line no-unused-vars
-  const [replayIndex, setReplayIndex] = useState(0);
-  // eslint-disable-next-line no-unused-vars
-  const [isReplaying, setIsReplaying] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const replayTimerRef = useRef(null);
-  // eslint-disable-next-line no-unused-vars
-  const REPLAY_INTERVAL_MS = 700;
-
-  // Persist users and logs
-  useEffect(() => {
-    try {
-      localStorage.setItem(LOCAL_USERS_KEY, JSON.stringify(users));
-    } catch {}
-  }, [users]);
-
+  // Persist logs
   useEffect(() => {
     try {
       localStorage.setItem(LOCAL_LOG_KEY, JSON.stringify(attackLog));
-    } catch {}
+    } catch { }
   }, [attackLog]);
 
-  // Prevent page jump on log updates — only auto-scroll console if near bottom
+  // Auto-scroll console 
   useEffect(() => {
     const el = consoleRef.current;
     if (!el) return;
@@ -84,95 +47,73 @@ export default function AuthenticationSandbox() {
     setAttackLog(prev => [...prev, { ts, text }]);
   }
 
-  function updateUser(uname, fields) {
-    setUsers(prev => prev.map(u => (u.username === uname ? { ...u, ...fields } : u)));
-  }
-
-  function isCurrentlyLocked(user) {
-    if (!user || !user.lockedUntil) return false;
-    const now = Date.now();
-    if (user.lockedUntil > now) return true;
-    updateUser(user.username, { lockedUntil: 0, attempts: 0 });
-    return false;
-  }
-
-  function maskedUsers() {
-    return users.map(u => {
-      const pw = u.password || '';
-      const masked = pw.length <= 2 ? pw : pw[0] + '*'.repeat(Math.max(0, pw.length - 2)) + pw.slice(-1);
-      const attempts = u.attempts || 0;
-      const remaining = Math.max(0, MAX_ATTEMPTS - attempts);
-      const lockedNow = (u.lockedUntil || 0) > Date.now();
-      return { username: u.username, masked, remaining, lockedNow, attempts };
-    });
-  }
-
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e?.preventDefault?.();
     const uname = username.trim();
-    if (!uname) {
-      setMessage('Enter a username.');
-      return;
-    }
-    const user = users.find(u => u.username === uname);
-
-    if (user && isCurrentlyLocked(user)) {
-      setMessage('🔒 Account locked (simulated).');
-      pushLog(`Attempted login for ${uname} while locked`);
+    if (!uname || !password) {
+      setMessage('Enter username and password.');
       return;
     }
 
-    if (!user) {
-      setMessage('❌ Unknown user.');
-      pushLog(`Failed login attempt: ${uname} (unknown user)`);
-      return;
-    }
+    try {
+      const res = await fetch(`${API_URL}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: uname, password }),
+      });
 
-    if (user.password === password) {
-      setMessage(`✅ Welcome, ${uname}!`);
-      pushLog(`Successful login: ${uname}`);
-      updateUser(uname, { attempts: 0, lockedUntil: 0 });
-    } else {
-      const newAttempts = (user.attempts || 0) + 1;
-      if (newAttempts >= MAX_ATTEMPTS) {
-        const until = Date.now() + LOCK_DURATION_MS;
-        updateUser(uname, { attempts: newAttempts, lockedUntil: until });
-        setMessage('🔒 Too many failed attempts — account locked.');
-        pushLog(`Failed login attempt: ${uname} (attempt ${newAttempts})`);
-        pushLog(`Account ${uname} locked until ${new Date(until).toLocaleTimeString()}`);
+      const data = await res.json();
+
+      if (!res.ok) {
+        setMessage(`❌ ${data.error || 'Login failed'}`);
+        pushLog(`Failed login attempt: ${uname} (${data.error || 'Invalid credentials'})`);
       } else {
-        updateUser(uname, { attempts: newAttempts });
-        setMessage('❌ Invalid username or password.');
-        pushLog(`Failed login attempt: ${uname} (attempt ${newAttempts})`);
+        setMessage(`✅ Welcome, ${data.user.username}!`);
+        pushLog(`Successful login: ${uname}`);
+        localStorage.setItem('xploitsim_token', data.token);
       }
+    } catch (err) {
+      setMessage('❌ Connection error.');
+      pushLog(`Error contacting auth server: ${err.message}`);
     }
   }
 
-  function handleRegister() {
+  async function handleRegister() {
     const uname = username.trim();
     if (!uname || !password) {
       setMessage('Enter username and password to register.');
       return;
     }
-    if (users.some(u => u.username === uname)) {
-      setMessage('User already exists.');
-      return;
+
+    try {
+      const res = await fetch(`${API_URL}/api/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: uname, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setMessage(`❌ ${data.error || 'Registration failed'}`);
+      } else {
+        setMessage(`✅ Registered ${uname}! You can now login.`);
+        pushLog(`Registered new user: ${uname} via Backend`);
+      }
+    } catch (err) {
+      setMessage('❌ Connection error.');
     }
-    setUsers(prev => [...prev, { username: uname, password, attempts: 0, lockedUntil: 0 }]);
-    setMessage(`✅ Registered ${uname} (in-memory).`);
-    pushLog(`Registered new user: ${uname}`);
   }
 
   function resetDemo() {
-    setUsers(prev => prev.map(u => ({ ...u, attempts: 0, lockedUntil: 0 })));
     setAttackLog([]);
-    setMessage('Demo reset.');
-    pushLog('Demo reset.');
+    setMessage('Log cleared. (DB remains persistent on backend)');
+    pushLog('Log cleared.');
   }
 
   async function runCredentialStuffingAsync() {
     const common = ['123456', 'password', 'qwerty', 'admin', 'admin123'];
-    const targets = Array.from(new Set([...users.map(u => u.username), 'carol', 'dave']));
+    const targets = ['alice', 'bob', 'admin', 'carol'];
 
     setIsSimulating(true);
     simCancelRef.current = false;
@@ -181,39 +122,26 @@ export default function AuthenticationSandbox() {
     for (const t of targets) {
       if (simCancelRef.current) break;
 
-      const user = users.find(u => u.username === t);
-      if (user && isCurrentlyLocked(user)) {
-        pushLog(`${t}: <LOCKED>`);
-        continue;
-      }
-
       for (const pw of common) {
         if (simCancelRef.current) break;
-        await new Promise(r => setTimeout(r, 250));
+        await new Promise(r => setTimeout(r, 400));
 
-        const fresh = users.find(u => u.username === t);
-        if (!fresh) {
-          pushLog(`${t}:${pw} -> FAIL (no user)`);
-          continue;
-        }
-        if (isCurrentlyLocked(fresh)) {
-          pushLog(`${t}:${pw} -> FAIL (LOCKED)`);
-          continue;
-        }
-        if (fresh.password === pw) {
-          updateUser(fresh.username, { attempts: 0, lockedUntil: 0 });
-          pushLog(`${t}:${pw} -> SUCCESS`);
-        } else {
-          const newAttempts = (fresh.attempts || 0) + 1;
-          if (newAttempts >= MAX_ATTEMPTS) {
-            const until = Date.now() + LOCK_DURATION_MS;
-            updateUser(fresh.username, { attempts: newAttempts, lockedUntil: until });
-            pushLog(`${t}:${pw} -> FAIL (attempt ${newAttempts})`);
-            pushLog(`${t} locked until ${new Date(until).toLocaleTimeString()}`);
+        try {
+          const res = await fetch(`${API_URL}/api/auth/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username: t, password: pw }),
+          });
+
+          if (res.ok) {
+            pushLog(`${t}:${pw} -> SUCCESS`);
+            break;
           } else {
-            updateUser(fresh.username, { attempts: newAttempts });
-            pushLog(`${t}:${pw} -> FAIL (attempt ${newAttempts})`);
+            const data = await res.json();
+            pushLog(`${t}:${pw} -> FAIL (${data.error})`);
           }
+        } catch (err) {
+          pushLog(`${t}:${pw} -> ERR`);
         }
       }
     }
@@ -224,14 +152,13 @@ export default function AuthenticationSandbox() {
 
   return (
     <div className="broken-access-page">
-      {/* Hero Section */}
       <section className="bac-hero">
         <div className="bac-hero-content">
           <div className="bac-hero-text">
             <div className="bac-badge">A02:2021</div>
             <h1 className="bac-title">Authentication Failures Sandbox</h1>
             <p className="bac-subtitle">
-              Explore login attempt tracking, credential stuffing, and simulated account lockouts — all in-browser and persistent.
+              Explore login attempt tracking, credential stuffing, and account lockouts — interacting directly with a Node.js backend.
             </p>
           </div>
         </div>
@@ -277,7 +204,7 @@ export default function AuthenticationSandbox() {
                   onClick={resetDemo}
                   style={{ marginLeft: 8 }}
                 >
-                  Reset Demo
+                  Clear Logs
                 </button>
               </div>
             </form>
@@ -294,20 +221,9 @@ export default function AuthenticationSandbox() {
               )}
             </div>
 
-            <div style={{ marginTop: 16 }}>
-              <h4>Registered Users</h4>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center', marginTop: 8 }}>
-                {maskedUsers().map(u => (
-                  <div key={u.username} style={{ background: 'rgba(255,255,255,0.04)', padding: '8px 12px', borderRadius: 10 }}>
-                    <div style={{ fontWeight: 700 }}>{u.username}{u.lockedNow ? ' 🔒' : ''}</div>
-                    <div style={{ fontSize: 12 }}>{u.masked}</div>
-                    <div style={{ marginTop: 6, fontSize: 13 }}>
-                      Attempts: <strong>{u.attempts}</strong><br />
-                      Remaining: <strong>{u.remaining}</strong>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div style={{ marginTop: 20, padding: 15, background: 'rgba(255,165,0,0.05)', borderRadius: 10, fontSize: 13, color: '#aaa' }}>
+              ℹ️ Note: This sandbox now interacts with a <strong>live backend</strong>.
+              User accounts are persisted in a centralized SQLite database.
             </div>
           </div>
 

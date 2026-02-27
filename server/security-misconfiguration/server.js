@@ -8,9 +8,12 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import dotenv from "dotenv";
+dotenv.config({ path: "../../.env" });
+
 
 const app = express();
-const PORT = process.env.PORT || 5300;
+const PORT = process.env.MISCONFIG_PORT || 5300;
 
 // Basic middleware
 // Allow the frontend origin by default (safe behavior for most endpoints).
