@@ -1,4 +1,7 @@
 import express from 'express';
+import dotenv from "dotenv";
+dotenv.config({ path: "../../.env" });
+
 
 const app = express();
 app.use(express.json());
@@ -108,7 +111,7 @@ app.get('/safe/error', (req, res) => {
 // -------------------------------------------
 // Start Server
 // -------------------------------------------
-const PORT = 5200;
+const PORT = process.env.INSECURE_DESIGN_PORT || 5200;
 app.listen(PORT, () =>
   console.log(`Insecure Design sandbox running on http://localhost:${PORT}`)
 );

@@ -6,7 +6,8 @@ export default function VulnerableComponentsDemo() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch(getApiUrl(5002, "/api/data"))
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    fetch(`${API_URL}/api/vulnerable-components/api/data`)
       .then((res) => res.json())
       .then((data) => {
         setMessage(data.message);

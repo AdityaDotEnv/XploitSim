@@ -3,6 +3,9 @@ import bodyParser from 'body-parser';
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 import cors from 'cors';
+import dotenv from "dotenv";
+dotenv.config({ path: "../../.env" });
+
 
 
 const app = express();
@@ -10,7 +13,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-const DB_FILE = './injection.sqlite';
+const DB_FILE = '../data/injection.sqlite';
 
 
 async function getDB() {
@@ -59,5 +62,7 @@ res.json({ ok: true, echoed: text });
 });
 
 
-const PORT = process.env.PORT || 5100;
-app.listen(PORT, () => console.log(`Injection sandbox listening on http://localhost:${PORT}`));
+const PORT = process.env.INJECTION_PORT || 5100;
+app.listen(PORT, () => {
+  console.log(`💉 Injection backend running at http://localhost:${PORT}`);
+});

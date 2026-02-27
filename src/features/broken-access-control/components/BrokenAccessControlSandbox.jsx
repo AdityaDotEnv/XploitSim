@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "../assets/BrokenAccessControlSandbox.css";
 import { useNavigate } from "react-router-dom";
-import { getApiUrl } from "../../../config/api";
+
+const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:5000") + "/api/broken-access-control";
 
 const BrokenAccessControlSandbox = () => {
   const navigate = useNavigate();

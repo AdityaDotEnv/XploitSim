@@ -5,11 +5,12 @@ export default function SoftwareIntegrityDemo() {
   const [safeUpdate, setSafeUpdate] = useState(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5400/api/update")
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    fetch(`${API_URL}/api/software-data-integrity/api/update`)
       .then((res) => res.json())
       .then((data) => setUnsafeUpdate(data));
 
-    fetch("http://127.0.0.1:5400/api/update/signed")
+    fetch(`${API_URL}/api/software-data-integrity/api/update/signed`)
       .then((res) => res.json())
       .then((data) => setSafeUpdate(data));
   }, []);

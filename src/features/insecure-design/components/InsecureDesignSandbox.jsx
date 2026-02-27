@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from '../assets/InsecureDesignSandbox.module.css';
 import { getApiUrl } from "../../../config/api";
 
-const API_BASE = getApiUrl(5200);
+const API_BASE = (import.meta.env.VITE_API_URL || "http://localhost:5000") + "/api/insecure-design";
 
 export default function InsecureDesignSandbox() {
   const [configVuln, setConfigVuln] = useState(null);

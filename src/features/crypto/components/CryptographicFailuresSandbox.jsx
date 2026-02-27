@@ -3,7 +3,8 @@ import React, { useState, useEffect, useRef } from "react";
 import "../../vulnerable-components/assets/VulnerabilityPage.css";
 import "../assets/CryptographicFailuresSandbox.css";
 import { useNavigate } from "react-router-dom";
-import { getApiUrl } from "../../../config/api";
+
+const API_BASE = (import.meta.env.VITE_API_URL || "http://localhost:5000") + "/api/cryptographic-failures";
 
 export default function CryptographicFailuresSandbox() {
   const navigate = useNavigate();

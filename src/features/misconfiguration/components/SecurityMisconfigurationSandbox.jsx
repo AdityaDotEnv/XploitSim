@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styles from "../assets/SecurityMisconfigurationSandbox.module.css";
 import { getApiUrl } from "../../../config/api";
 
-const API_BASE = getApiUrl(5300);
+// Vite-compatible environment variable fallback
+const API_BASE = (import.meta.env.VITE_API_URL || "http://localhost:5000") + "/api/security-misconfiguration";
 
 export default function SecurityMisconfigurationSandbox() {
   const [vulnerableResp, setVulnerableResp] = useState("");
@@ -18,19 +19,19 @@ export default function SecurityMisconfigurationSandbox() {
   }
 
   async function doFetch(path, opts = {}, target = "vulnerable") {
-    const url = `${API_BASE}${path}`;
-    appendLog(`Calling ${url}`);
+    const url = `${API_BASE}${path} `;
+    appendLog(`Calling ${url} `);
 
     try {
       const res = await fetch(url, opts);
       const text = await res.text();
-      const display = `HTTP ${res.status}\n${text}`;
+      const display = `HTTP ${res.status} \n${text} `;
 
       if (target === "vulnerable") setVulnerableResp(display);
       else setSafeResp(display);
 
     } catch (err) {
-      appendLog(`Fetch error: ${err.message}`);
+      appendLog(`Fetch error: ${err.message} `);
 
       if (target === "vulnerable") setVulnerableResp(String(err));
       else setSafeResp(String(err));
@@ -207,7 +208,7 @@ export default function SecurityMisconfigurationSandbox() {
             <b>Trigger Safe Error:</b> Shows only generic error.
           </li>
           <li>
-            <b>Check Vulnerable CORS:</b> Shows `Access-Control-Allow-Origin: *`
+            <b>Check Vulnerable CORS:</b> Shows `Access - Control - Allow - Origin: * `
           </li>
           <li>
             <b>Check Safe CORS:</b> Restricts to trusted origin only.

@@ -1,3 +1,10 @@
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const fs = require("fs");
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
@@ -13,7 +20,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // ⚠️ VULNERABLE: log file with weak permissions
-const LOG_FILE = join(__dirname, "weak-log.txt");
+const LOG_FILE = path.join(__dirname, "..", "data", "weak-log.txt");
 
 // Ensure log file exists
 if (!fs.existsSync(LOG_FILE)) {
@@ -73,6 +80,7 @@ app.get("/api/view-logs", (req, res) => {
   res.json({ logs });
 });
 
-app.listen(5600, () => {
+const PORT = process.env.LOGGING_PORT || 5600;
+app.listen(PORT, () => {
   console.log("Security Logging Failures sandbox running at http://127.0.0.1:5600");
 });

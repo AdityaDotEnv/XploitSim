@@ -10,7 +10,11 @@ import express from "express";
 import cors from "cors";
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
+import { signToken } from "../shared/auth.js";
 import { db } from "./db.js";
+import dotenv from "dotenv";
+dotenv.config({ path: "../../.env" });
+
 
 const app = express();
 app.use(express.json());
@@ -73,12 +77,13 @@ app.post("/auth/login", (req, res) => {
     // vulnerable: comparing plaintext passwords
     if (user.password !== password) return res.status(401).json({ error: "invalid credentials" });
 
-    // vulnerable: JWT with weak secret and long expiry (demo)
-    const token = jwt.sign({ id: user.id, username: user.username, role: "user" }, WEAK_JWT_SECRET/*weak*/, { expiresIn: "7d" });
+    // Use shared signing for consistency, but the demo still highlights the vulnerability of using weak hashing/storing
+    const token = signToken({ id: user.id, username: user.username, role: "user" });
 
-    res.json({ token, note: "This token uses a weak secret & long expiry (vulnerable demo)" });
+    res.json({ token, note: "This token is now signed with the global centralized secret for cross-module sessions." });
   });
 });
+
 
 // Create weak MD5 hash (demo endpoint)
 app.post("/crypto/hash-md5", (req, res) => {
@@ -138,7 +143,7 @@ app.post("/crypto/verify-jwt", (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.CRYPTO_PORT || 5001;
 app.listen(PORT, () => {
   console.log(`🔐 Cryptographic Failures demo listening on http://localhost:${PORT}`);
   console.log("⚠️ WARNING: intentionally insecure. Local sandbox only.");
