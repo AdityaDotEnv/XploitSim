@@ -1,7 +1,7 @@
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const axios = require("axios");
+import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import axios from "axios";
 
 const app = express();
 app.use(cors());

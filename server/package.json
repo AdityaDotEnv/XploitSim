@@ -1,9 +1,10 @@
 {
   "name": "xploitsim-server",
   "version": "1.0.0",
+  "type": "module",
   "description": "Centralized server for XploitSim",
   "scripts": {
-    "start": "concurrently \"cd broken-access-control && node server.js\" \"cd cryptographic-failures && node server.js\" \"cd injection && node server.js\" \"cd insecure-design && node server.js\" \"cd security-logging-failures && node server.js\" \"cd security-misconfiguration && node server.js\" \"cd server-side-request-forgery && node server.js\" \"cd software-data-integrity && node server.js\" \"cd vulnerable-components && node server.js\""
+    "start": "concurrently \"node broken-access-control/server.js\" \"node cryptographic-failures/server.js\" \"node injection/server.js\" \"node insecure-design/server.js\" \"node security-logging-failures/server.js\" \"node security-misconfiguration/server.js\" \"node server-side-request-forgery/server.js\" \"node software-data-integrity/server.js\" \"node vulnerable-components/server.js\""
   },
   "dependencies": {
     "axios": "^1.6.0",

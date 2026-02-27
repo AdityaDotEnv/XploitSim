@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { getApiUrl } from "../../../config/api";
 
 export default function ServerSideRequestForgeryDemo() {
   const [targetUrl, setTargetUrl] = useState("");
@@ -6,7 +7,7 @@ export default function ServerSideRequestForgeryDemo() {
 
   async function sendRequest() {
     try {
-      const res = await fetch("http://127.0.0.1:5500/api/ssrf", {
+      const res = await fetch(getApiUrl(5500, "/api/ssrf"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: targetUrl }),
@@ -47,10 +48,10 @@ export default function ServerSideRequestForgeryDemo() {
 
         <ul style={{ listStyle: "none", paddingLeft: "0", color: "#ddd" }}>
           <li style={{ marginBottom: "8px" }}>
-            <code style={{ color: "#7dff7d" }}>http://127.0.0.1:4000</code>
+            <code style={{ color: "#7dff7d" }}>{getApiUrl(4000)}</code>
           </li>
           <li style={{ marginBottom: "8px" }}>
-            <code style={{ color: "#7dff7d" }}>http://localhost:5001</code>
+            <code style={{ color: "#7dff7d" }}>{getApiUrl(5001)}</code>
           </li>
           <li style={{ marginBottom: "8px" }}>
             <code style={{ color: "#ff7d7d" }}>
@@ -63,7 +64,7 @@ export default function ServerSideRequestForgeryDemo() {
 
       <input
         type="text"
-        placeholder="Enter URL to fetch (e.g., http://127.0.0.1:4000)"
+        placeholder={`Enter URL to fetch (e.g., ${getApiUrl(4000)})`}
         value={targetUrl}
         onChange={(e) => setTargetUrl(e.target.value)}
         style={{
