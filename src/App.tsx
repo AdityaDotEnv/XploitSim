@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
 import ScrollToTop from './components/ScrollToTop.tsx';
+import ChatBot from './components/ChatBot/ChatBot.tsx';
 import MainLayout from './layouts/MainLayout.tsx';
 import HomePage from './pages/HomePage.tsx';
 import AboutPage from './pages/AboutPage.tsx';
@@ -37,6 +38,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
+      <ChatBot />
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />

@@ -27,6 +27,7 @@ const proxies: Record<string, string> = {
   '/api/software-data-integrity': 'http://localhost:5400',
   '/api/security-logging-failures': 'http://localhost:5600',
   '/api/server-side-request-forgery': 'http://localhost:5500',
+  '/api/chatbot': 'http://localhost:5700',
 };
 
 // Apply proxies

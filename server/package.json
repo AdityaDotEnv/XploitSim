@@ -4,9 +4,10 @@
   "type": "module",
   "description": "Centralized server for XploitSim",
   "scripts": {
-    "start": "concurrently \"npx tsx gateway.ts\" \"npx tsx auth/server.ts\" \"npx tsx broken-access-control/server.ts\" \"npx tsx cryptographic-failures/server.ts\" \"npx tsx injection/server.ts\" \"npx tsx insecure-design/server.ts\" \"npx tsx security-logging-failures/server.ts\" \"npx tsx security-misconfiguration/server.ts\" \"npx tsx server-side-request-forgery/server.ts\" \"npx tsx software-data-integrity/server.ts\" \"npx tsx vulnerable-components/server.ts\""
+    "start": "concurrently \"npx tsx gateway.ts\" \"npx tsx auth/server.ts\" \"npx tsx broken-access-control/server.ts\" \"npx tsx cryptographic-failures/server.ts\" \"npx tsx injection/server.ts\" \"npx tsx insecure-design/server.ts\" \"npx tsx security-logging-failures/server.ts\" \"npx tsx security-misconfiguration/server.ts\" \"npx tsx server-side-request-forgery/server.ts\" \"npx tsx software-data-integrity/server.ts\" \"npx tsx vulnerable-components/server.ts\" \"npx tsx chatbot/server.ts\""
   },
   "dependencies": {
+    "@langchain/google-genai": "^2.1.24",
     "axios": "^1.6.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
@@ -15,6 +16,7 @@
     "http-proxy-middleware": "^3.0.5",
     "js-yaml": "^4.1.0",
     "jsonwebtoken": "^9.0.2",
+    "langchain": "^1.2.30",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
   },
